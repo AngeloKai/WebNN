@@ -2,26 +2,90 @@
 Title: Base Neural Network: Use Cases and Requirements
 Shortname: base-neural-network-1
 Level: 1
-Status: UD
-Group: wicg
-URL: http://example.com/url-this-spec-will-live-at
+Status: DREAM
+URL: https://angelokai.github.io/WebNN/explainer/explainer.html
 Editor: Angelo Liao, w3cid 94342, Microsoft, huliao@microsoft.com
 Abstract: A short description of your spec, one or two sentences.
 </pre>
 
+# Abstract # {#abstract} 
+
+# Status of this document # {#status}
+
+This is a <strong>really unofficial</strong> draft. It’s not meant to capture any consensus, beyond 
+my own personal feelings about what sounds interesting. It is provided for discussion only and may 
+change at any moment, and should not be taken as "official" or even "unofficial, but planned". Its 
+publication here does not imply endorsement of its contents by W3C or by Microsoft. Don’t cite this 
+document other than as a collection of interesting ideas.
+
 # Introduction # {#intro}
-=====================
 
-Introduction here.
+Neural network algorithms have been significantly improved in terms of performance, reliability, and
+accuracy in recent years. While typically thought of a technology for the cloud, neural network 
+have applications on device as well. After training the network on cloud or high performance development
+environment, developers can port the network to their client applications to reap benefits such as
+performance boost. However, without system level support, developers often face 
+bottlenecks in terms of memory and/or performance. Several major platforms have since shipped system
+APIs to help mitigate the problems. For example, iOS shipped Accelerate and Basic Neural Network 
+Subroutiines. The Universal Windows Platform (UWP) has also added related libraries. Similiar APIs
+have yet to be seen on the web platform. The document describes the use cases that motivate the API,
+examines similiar APIs avaiable to native applications, discusses how web developers currently work
+around the problems, and sketches a set of requirements that would drive the related specification.
+Contributions to the document are welcomed.  
 
-## Use Cases ## {#use-case}
+# Introduction to Neural Network # 
 
-=====================
+## Stages of Development ##
 
-Use cases here. 
+Training 
+Inference 
 
-# Core API # {#core}
 
-## Linear Algebra ## {#linear-algebra}
+# Status Quo # {#status-quo}
 
-## ##
+## Native Platforms ## {#native-platform}
+
+on-device processing
+
+### Known Applications ### {#known-applications}
+
+### Performance Improvement Techniques ### {#techniques}
+
+
+## Web Development Library ## {#web-library}
+
+Demo link: .
+
+### Specilized API ###
+
+Web Authentication api 
+
+Shape Detection API 
+
+Real Time Communication API 
+
+Web Speech API 
+
+### WebGL ### {#webgl}
+
+### Web Assembly ### {#web-assembly}
+
+
+# Requirements # {#requirements}
+
+Balance between hardware acceleration and the level of abstraction needed for the web platform. As
+part of looking into the balance, we can different sets of API. We also need to make sure we don'
+cater to one algorithm but look for broader applications. 
+
+Changing chip market.
+
+Help developers easily port apps. 
+
+## Related Developing Standards ## {#related-standards}
+
+WebGPU, WebAssembly 2.0, WebGL 2.0
+
+### WebGL 2.0 ### {#webgl}
+
+### Web Assembly 2.0 ### {#web-assembly}
+

@@ -1177,7 +1177,7 @@ Possible extra rowspan handling
 	}
 </style>
   <meta content="Bikeshed version f115c04bb0a2f38cf36c418c0c7e75707651fa54" name="generator">
-  <link href="http://example.com/url-this-spec-will-live-at" rel="canonical">
+  <link href="https://angelokai.github.io/WebNN/explainer/explainer.html" rel="canonical">
 <style>/* style-md-lists */
 
             /* This is a weird hack for me not yet following the commonmark spec
@@ -1329,11 +1329,11 @@ Possible extra rowspan handling
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Base Neural Network: Use Cases and Requirements</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Unofficial Proposal Draft, <time class="dt-updated" datetime="2017-08-27">27 August 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2017-08-28">28 August 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
-     <dd><a class="u-url" href="http://example.com/url-this-spec-will-live-at">http://example.com/url-this-spec-will-live-at</a>
+     <dd><a class="u-url" href="https://angelokai.github.io/WebNN/explainer/explainer.html">https://angelokai.github.io/WebNN/explainer/explainer.html</a>
      <dt>Issue Tracking:
      <dd><a href="https://github.com/AngeloKai/WebNN/issues/">GitHub</a>
      <dt class="editor">Editor:
@@ -1341,8 +1341,12 @@ Possible extra rowspan handling
     </dl>
    </div>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2017 the Contributors to the Base Neural Network: Use Cases and Requirements Specification, published by the <a href="https://www.w3.org/community/wicg/">Web Platform Incubator Community Group</a> under the <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>.
-A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
+and related or neighboring rights to this work.
+In addition, as of 28 August 2017,
+the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
+which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
+Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
@@ -1350,30 +1354,43 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <p>A short description of your spec, one or two sentences.</p>
   </div>
   <div data-fill-with="at-risk"></div>
-  <h2 class="no-num no-toc no-ref heading settled" id="status"><span class="content">Status of this document</span></h2>
-  <div data-fill-with="status">
-   <p> This specification was published by the <a href="https://www.w3.org/community/wicg/">Web Platform Incubator Community Group</a>.
-  It is not a W3C Standard nor is it on the W3C Standards Track.
-
-  Please note that under the <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a> there is a limited opt-out and other conditions apply.
-
-  Learn more about <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>. </p>
-   <p></p>
-  </div>
-  <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
+    <li><a href="#abstract①"><span class="secno">1</span> <span class="content">Abstract</span></a>
+    <li><a href="#status"><span class="secno">2</span> <span class="content">Status of this document</span></a>
+    <li><a href="#intro"><span class="secno">3</span> <span class="content">Introduction</span></a>
     <li>
-     <a href="#intro"><span class="secno">1</span> <span class="content">Introduction</span></a>
+     <a href="#introduction-to-neural-network"><span class="secno">4</span> <span class="content">Introduction to Neural Network #</span></a>
      <ol class="toc">
-      <li><a href="#use-case"><span class="secno">1.1</span> <span class="content">Use Cases</span></a>
+      <li><a href="#stages-of-development"><span class="secno">4.1</span> <span class="content">Stages of Development ##</span></a>
      </ol>
     <li>
-     <a href="#core"><span class="secno">2</span> <span class="content">Core API</span></a>
+     <a href="#status-quo"><span class="secno">5</span> <span class="content">Status Quo</span></a>
      <ol class="toc">
-      <li><a href="#linear-algebra"><span class="secno">2.1</span> <span class="content">Linear Algebra</span></a>
-      <li><a href="#"><span class="secno">2.2</span> <span class="content">##</span></a>
+      <li>
+       <a href="#native-platform"><span class="secno">5.1</span> <span class="content">Native Platforms</span></a>
+       <ol class="toc">
+        <li><a href="#known-applications"><span class="secno">5.1.1</span> <span class="content">Known Applications</span></a>
+        <li><a href="#techniques"><span class="secno">5.1.2</span> <span class="content">Performance Improvement Techniques</span></a>
+       </ol>
+      <li>
+       <a href="#web-library"><span class="secno">5.2</span> <span class="content">Web Development Library</span></a>
+       <ol class="toc">
+        <li><a href="#specilized-api"><span class="secno">5.2.1</span> <span class="content">Specilized API ###</span></a>
+        <li><a href="#webgl"><span class="secno">5.2.2</span> <span class="content">WebGL</span></a>
+        <li><a href="#web-assembly"><span class="secno">5.2.3</span> <span class="content">Web Assembly</span></a>
+       </ol>
+     </ol>
+    <li>
+     <a href="#requirements"><span class="secno">6</span> <span class="content">Requirements</span></a>
+     <ol class="toc">
+      <li>
+       <a href="#related-standards"><span class="secno">6.1</span> <span class="content">Related Developing Standards</span></a>
+       <ol class="toc">
+        <li><a href="#webgl①"><span class="secno">6.1.1</span> <span class="content">WebGL 2.0</span></a>
+        <li><a href="#web-assembly①"><span class="secno">6.1.2</span> <span class="content">Web Assembly 2.0</span></a>
+       </ol>
      </ol>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
@@ -1384,15 +1401,54 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    </ol>
   </nav>
   <main>
-   <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
-    ===================== 
-   <p>Introduction here.</p>
-   <h3 class="heading settled" data-level="1.1" id="use-case"><span class="secno">1.1. </span><span class="content">Use Cases</span><a class="self-link" href="#use-case"></a></h3>
-    ===================== 
-   <p>Use cases here.</p>
-   <h2 class="heading settled" data-level="2" id="core"><span class="secno">2. </span><span class="content">Core API</span><a class="self-link" href="#core"></a></h2>
-   <h3 class="heading settled" data-level="2.1" id="linear-algebra"><span class="secno">2.1. </span><span class="content">Linear Algebra</span><a class="self-link" href="#linear-algebra"></a></h3>
-   <h3 class="heading settled" data-level="2.2" id=""><span class="secno">2.2. </span><span class="content">##</span><a class="self-link" href="#"></a></h3>
+   <h2 class="heading settled" data-level="1" id="abstract①"><span class="secno">1. </span><span class="content">Abstract</span><a class="self-link" href="#abstract①"></a></h2>
+   <h2 class="heading settled" data-level="2" id="status"><span class="secno">2. </span><span class="content">Status of this document</span><a class="self-link" href="#status"></a></h2>
+   <p>This is a <strong>really unofficial</strong> draft. It’s not meant to capture any consensus, beyond
+my own personal feelings about what sounds interesting. It is provided for discussion only and may 
+change at any moment, and should not be taken as "official" or even "unofficial, but planned". Its 
+publication here does not imply endorsement of its contents by W3C or by Microsoft. Don’t cite this 
+document other than as a collection of interesting ideas.</p>
+   <h2 class="heading settled" data-level="3" id="intro"><span class="secno">3. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
+   <p>Neural network algorithms have been significantly improved in terms of performance, reliability, and
+accuracy in recent years. While typically thought of a technology for the cloud, neural network 
+have applications on device as well. After training the network on cloud or high performance development
+environment, developers can port the network to their client applications to reap benefits such as
+performance boost. However, without system level support, developers often face 
+bottlenecks in terms of memory and/or performance. Several major platforms have since shipped system
+APIs to help mitigate the problems. For example, iOS shipped Accelerate and Basic Neural Network 
+Subroutiines. The Universal Windows Platform (UWP) has also added related libraries. Similiar APIs
+have yet to be seen on the web platform. The document describes the use cases that motivate the API,
+examines similiar APIs avaiable to native applications, discusses how web developers currently work
+around the problems, and sketches a set of requirements that would drive the related specification.
+Contributions to the document are welcomed.</p>
+   <h2 class="heading settled" data-level="4" id="introduction-to-neural-network"><span class="secno">4. </span><span class="content">Introduction to Neural Network #</span><a class="self-link" href="#introduction-to-neural-network"></a></h2>
+   <h3 class="heading settled" data-level="4.1" id="stages-of-development"><span class="secno">4.1. </span><span class="content">Stages of Development ##</span><a class="self-link" href="#stages-of-development"></a></h3>
+   <p>Training
+Inference</p>
+   <h2 class="heading settled" data-level="5" id="status-quo"><span class="secno">5. </span><span class="content">Status Quo</span><a class="self-link" href="#status-quo"></a></h2>
+   <h3 class="heading settled" data-level="5.1" id="native-platform"><span class="secno">5.1. </span><span class="content">Native Platforms</span><a class="self-link" href="#native-platform"></a></h3>
+   <p>on-device processing</p>
+   <h4 class="heading settled" data-level="5.1.1" id="known-applications"><span class="secno">5.1.1. </span><span class="content">Known Applications</span><a class="self-link" href="#known-applications"></a></h4>
+   <h4 class="heading settled" data-level="5.1.2" id="techniques"><span class="secno">5.1.2. </span><span class="content">Performance Improvement Techniques</span><a class="self-link" href="#techniques"></a></h4>
+   <h3 class="heading settled" data-level="5.2" id="web-library"><span class="secno">5.2. </span><span class="content">Web Development Library</span><a class="self-link" href="#web-library"></a></h3>
+   <p>Demo link: .</p>
+   <h4 class="heading settled" data-level="5.2.1" id="specilized-api"><span class="secno">5.2.1. </span><span class="content">Specilized API ###</span><a class="self-link" href="#specilized-api"></a></h4>
+   <p>Web Authentication api</p>
+   <p>Shape Detection API</p>
+   <p>Real Time Communication API</p>
+   <p>Web Speech API</p>
+   <h4 class="heading settled" data-level="5.2.2" id="webgl"><span class="secno">5.2.2. </span><span class="content">WebGL</span><a class="self-link" href="#webgl"></a></h4>
+   <h4 class="heading settled" data-level="5.2.3" id="web-assembly"><span class="secno">5.2.3. </span><span class="content">Web Assembly</span><a class="self-link" href="#web-assembly"></a></h4>
+   <h2 class="heading settled" data-level="6" id="requirements"><span class="secno">6. </span><span class="content">Requirements</span><a class="self-link" href="#requirements"></a></h2>
+   <p>Balance between hardware acceleration and the level of abstraction needed for the web platform. As
+part of looking into the balance, we can different sets of API. We also need to make sure we don'
+cater to one algorithm but look for broader applications.</p>
+   <p>Changing chip market.</p>
+   <p>Help developers easily port apps.</p>
+   <h3 class="heading settled" data-level="6.1" id="related-standards"><span class="secno">6.1. </span><span class="content">Related Developing Standards</span><a class="self-link" href="#related-standards"></a></h3>
+   <p>WebGPU, WebAssembly 2.0, WebGL 2.0</p>
+   <h4 class="heading settled" data-level="6.1.1" id="webgl①"><span class="secno">6.1.1. </span><span class="content">WebGL 2.0</span><a class="self-link" href="#webgl①"></a></h4>
+   <h4 class="heading settled" data-level="6.1.2" id="web-assembly①"><span class="secno">6.1.2. </span><span class="content">Web Assembly 2.0</span><a class="self-link" href="#web-assembly①"></a></h4>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
