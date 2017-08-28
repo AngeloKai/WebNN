@@ -1,10 +1,10 @@
 <pre class='metadata'>
-Title: Base Neural Network Level 1
+Title: Base Neural Network: Use Cases and Requirements
 Shortname: base-neural-network-1
 Level: 1
-Status: ED
+Status: UD
 Group: wicg
-URL: https://angelokai.github.io/WebNN/index.html
+URL: http://example.com/url-this-spec-will-live-at
 Editor: Angelo Liao, w3cid 94342, Microsoft, huliao@microsoft.com
 Abstract: A short description of your spec, one or two sentences.
 </pre>
