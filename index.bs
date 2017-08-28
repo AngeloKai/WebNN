@@ -1,0 +1,27 @@
+<pre class='metadata'>
+Title: Base Neural Network Level 1
+Shortname: base-neural-network-1
+Level: 1
+Status: ED
+Group: wicg
+URL: http://example.com/url-this-spec-will-live-at
+Editor: Angelo Liao, w3cid 94342, Microsoft, huliao@microsoft.com
+Abstract: A short description of your spec, one or two sentences.
+</pre>
+
+# Introduction # {#intro}
+=====================
+
+Introduction here.
+
+## Use Cases ## {#use-case}
+
+=====================
+
+Use cases here. 
+
+# Core API # {#core}
+
+## Linear Algebra ## {#linear-algebra}
+
+## ##
