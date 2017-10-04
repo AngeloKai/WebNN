@@ -1176,160 +1176,161 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version f115c04bb0a2f38cf36c418c0c7e75707651fa54" name="generator">
+  <meta content="Bikeshed version 5834a15f311a639c0b59ff2edbf3a060391d15ff" name="generator">
   <link href="https://angelokai.github.io/WebNN/explainer/explainer.html" rel="canonical">
+  <meta content="52247a976c6e32dccc07c914ea7c8097ec8220ba" name="document-revision">
 <style>/* style-md-lists */
 
-            /* This is a weird hack for me not yet following the commonmark spec
-               regarding paragraph and lists. */
-            [data-md] > :first-child {
-                margin-top: 0;
-            }
-            [data-md] > :last-child {
-                margin-bottom: 0;
-            }</style>
+/* This is a weird hack for me not yet following the commonmark spec
+   regarding paragraph and lists. */
+[data-md] > :first-child {
+    margin-top: 0;
+}
+[data-md] > :last-child {
+    margin-bottom: 0;
+}</style>
 <style>/* style-counters */
 
-            body {
-                counter-reset: example figure issue;
-            }
-            .issue {
-                counter-increment: issue;
-            }
-            .issue:not(.no-marker)::before {
-                content: "Issue " counter(issue);
-            }
+body {
+    counter-reset: example figure issue;
+}
+.issue {
+    counter-increment: issue;
+}
+.issue:not(.no-marker)::before {
+    content: "Issue " counter(issue);
+}
 
-            .example {
-                counter-increment: example;
-            }
-            .example:not(.no-marker)::before {
-                content: "Example " counter(example);
-            }
-            .invalid.example:not(.no-marker)::before,
-            .illegal.example:not(.no-marker)::before {
-                content: "Invalid Example" counter(example);
-            }
+.example {
+    counter-increment: example;
+}
+.example:not(.no-marker)::before {
+    content: "Example " counter(example);
+}
+.invalid.example:not(.no-marker)::before,
+.illegal.example:not(.no-marker)::before {
+    content: "Invalid Example" counter(example);
+}
 
-            figcaption {
-                counter-increment: figure;
-            }
-            figcaption:not(.no-marker)::before {
-                content: "Figure " counter(figure) " ";
-            }</style>
+figcaption {
+    counter-increment: figure;
+}
+figcaption:not(.no-marker)::before {
+    content: "Figure " counter(figure) " ";
+}</style>
 <style>/* style-selflinks */
 
-            .heading, .issue, .note, .example, li, dt {
-                position: relative;
-            }
-            a.self-link {
-                position: absolute;
-                top: 0;
-                left: calc(-1 * (3.5rem - 26px));
-                width: calc(3.5rem - 26px);
-                height: 2em;
-                text-align: center;
-                border: none;
-                transition: opacity .2s;
-                opacity: .5;
-            }
-            a.self-link:hover {
-                opacity: 1;
-            }
-            .heading > a.self-link {
-                font-size: 83%;
-            }
-            li > a.self-link {
-                left: calc(-1 * (3.5rem - 26px) - 2em);
-            }
-            dfn > a.self-link {
-                top: auto;
-                left: auto;
-                opacity: 0;
-                width: 1.5em;
-                height: 1.5em;
-                background: gray;
-                color: white;
-                font-style: normal;
-                transition: opacity .2s, background-color .2s, color .2s;
-            }
-            dfn:hover > a.self-link {
-                opacity: 1;
-            }
-            dfn > a.self-link:hover {
-                color: black;
-            }
+.heading, .issue, .note, .example, li, dt {
+    position: relative;
+}
+a.self-link {
+    position: absolute;
+    top: 0;
+    left: calc(-1 * (3.5rem - 26px));
+    width: calc(3.5rem - 26px);
+    height: 2em;
+    text-align: center;
+    border: none;
+    transition: opacity .2s;
+    opacity: .5;
+}
+a.self-link:hover {
+    opacity: 1;
+}
+.heading > a.self-link {
+    font-size: 83%;
+}
+li > a.self-link {
+    left: calc(-1 * (3.5rem - 26px) - 2em);
+}
+dfn > a.self-link {
+    top: auto;
+    left: auto;
+    opacity: 0;
+    width: 1.5em;
+    height: 1.5em;
+    background: gray;
+    color: white;
+    font-style: normal;
+    transition: opacity .2s, background-color .2s, color .2s;
+}
+dfn:hover > a.self-link {
+    opacity: 1;
+}
+dfn > a.self-link:hover {
+    color: black;
+}
 
-            a.self-link::before            { content: "¶"; }
-            .heading > a.self-link::before { content: "§"; }
-            dfn > a.self-link::before      { content: "#"; }</style>
+a.self-link::before            { content: "¶"; }
+.heading > a.self-link::before { content: "§"; }
+dfn > a.self-link::before      { content: "#"; }</style>
 <style>/* style-autolinks */
 
-            .css.css, .property.property, .descriptor.descriptor {
-                color: #005a9c;
-                font-size: inherit;
-                font-family: inherit;
-            }
-            .css::before, .property::before, .descriptor::before {
-                content: "‘";
-            }
-            .css::after, .property::after, .descriptor::after {
-                content: "’";
-            }
-            .property, .descriptor {
-                /* Don't wrap property and descriptor names */
-                white-space: nowrap;
-            }
-            .type { /* CSS value <type> */
-                font-style: italic;
-            }
-            pre .property::before, pre .property::after {
-                content: "";
-            }
-            [data-link-type="property"]::before,
-            [data-link-type="propdesc"]::before,
-            [data-link-type="descriptor"]::before,
-            [data-link-type="value"]::before,
-            [data-link-type="function"]::before,
-            [data-link-type="at-rule"]::before,
-            [data-link-type="selector"]::before,
-            [data-link-type="maybe"]::before {
-                content: "‘";
-            }
-            [data-link-type="property"]::after,
-            [data-link-type="propdesc"]::after,
-            [data-link-type="descriptor"]::after,
-            [data-link-type="value"]::after,
-            [data-link-type="function"]::after,
-            [data-link-type="at-rule"]::after,
-            [data-link-type="selector"]::after,
-            [data-link-type="maybe"]::after {
-                content: "’";
-            }
+.css.css, .property.property, .descriptor.descriptor {
+    color: #005a9c;
+    font-size: inherit;
+    font-family: inherit;
+}
+.css::before, .property::before, .descriptor::before {
+    content: "‘";
+}
+.css::after, .property::after, .descriptor::after {
+    content: "’";
+}
+.property, .descriptor {
+    /* Don't wrap property and descriptor names */
+    white-space: nowrap;
+}
+.type { /* CSS value <type> */
+    font-style: italic;
+}
+pre .property::before, pre .property::after {
+    content: "";
+}
+[data-link-type="property"]::before,
+[data-link-type="propdesc"]::before,
+[data-link-type="descriptor"]::before,
+[data-link-type="value"]::before,
+[data-link-type="function"]::before,
+[data-link-type="at-rule"]::before,
+[data-link-type="selector"]::before,
+[data-link-type="maybe"]::before {
+    content: "‘";
+}
+[data-link-type="property"]::after,
+[data-link-type="propdesc"]::after,
+[data-link-type="descriptor"]::after,
+[data-link-type="value"]::after,
+[data-link-type="function"]::after,
+[data-link-type="at-rule"]::after,
+[data-link-type="selector"]::after,
+[data-link-type="maybe"]::after {
+    content: "’";
+}
 
-            [data-link-type].production::before,
-            [data-link-type].production::after,
-            .prod [data-link-type]::before,
-            .prod [data-link-type]::after {
-                content: "";
-            }
+[data-link-type].production::before,
+[data-link-type].production::after,
+.prod [data-link-type]::before,
+.prod [data-link-type]::after {
+    content: "";
+}
 
-            [data-link-type=element],
-            [data-link-type=element-attr] {
-                font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace;
-                font-size: .9em;
-            }
-            [data-link-type=element]::before { content: "<" }
-            [data-link-type=element]::after  { content: ">" }
+[data-link-type=element],
+[data-link-type=element-attr] {
+    font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    font-size: .9em;
+}
+[data-link-type=element]::before { content: "<" }
+[data-link-type=element]::after  { content: ">" }
 
-            [data-link-type=biblio] {
-                white-space: pre;
-            }</style>
+[data-link-type=biblio] {
+    white-space: pre;
+}</style>
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Base Neural Network: Use Cases and Requirements</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2017-08-28">28 August 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2017-10-02">2 October 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1343,7 +1344,7 @@ Possible extra rowspan handling
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 28 August 2017,
+In addition, as of 2 October 2017,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1357,41 +1358,42 @@ Parts of this work may be from another specification document.  If so, those par
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
-    <li><a href="#abstract①"><span class="secno">1</span> <span class="content">Abstract</span></a>
-    <li><a href="#status"><span class="secno">2</span> <span class="content">Status of this document</span></a>
-    <li><a href="#intro"><span class="secno">3</span> <span class="content">Introduction</span></a>
+    <li><a href="#status"><span class="secno">1</span> <span class="content">Status of this document</span></a>
+    <li><a href="#intro"><span class="secno">2</span> <span class="content">Introduction</span></a>
     <li>
-     <a href="#introduction-to-neural-network"><span class="secno">4</span> <span class="content">Introduction to Neural Network #</span></a>
+     <a href="#intro-to-ml"><span class="secno">3</span> <span class="content">Machine Learning and Neural Network</span></a>
      <ol class="toc">
-      <li><a href="#stages-of-development"><span class="secno">4.1</span> <span class="content">Stages of Development ##</span></a>
+      <li><a href="#stages-of-development"><span class="secno">3.1</span> <span class="content">Stages of Development</span></a>
      </ol>
     <li>
-     <a href="#status-quo"><span class="secno">5</span> <span class="content">Status Quo</span></a>
+     <a href="#status-quo"><span class="secno">4</span> <span class="content">Status Quo</span></a>
      <ol class="toc">
+      <li><a href="#native-platform"><span class="secno">4.1</span> <span class="content">Native Platforms</span></a>
+      <li><a href="#web-developer-interest"><span class="secno">4.2</span> <span class="content">Web Developer Interests</span></a>
       <li>
-       <a href="#native-platform"><span class="secno">5.1</span> <span class="content">Native Platforms</span></a>
+       <a href="#use-cases"><span class="secno">4.3</span> <span class="content">Use Cases</span></a>
        <ol class="toc">
-        <li><a href="#known-applications"><span class="secno">5.1.1</span> <span class="content">Known Applications</span></a>
-        <li><a href="#techniques"><span class="secno">5.1.2</span> <span class="content">Performance Improvement Techniques</span></a>
+        <li><a href="#client-side-machine-learning"><span class="secno">4.3.1</span> <span class="content">Replicate Cloud-based Machine Learning on the Client</span></a>
        </ol>
       <li>
-       <a href="#web-library"><span class="secno">5.2</span> <span class="content">Web Development Library</span></a>
+       <a href="#related-standards"><span class="secno">4.4</span> <span class="content">Related Standards</span></a>
        <ol class="toc">
-        <li><a href="#specilized-api"><span class="secno">5.2.1</span> <span class="content">Specilized API ###</span></a>
-        <li><a href="#webgl"><span class="secno">5.2.2</span> <span class="content">WebGL</span></a>
-        <li><a href="#web-assembly"><span class="secno">5.2.3</span> <span class="content">Web Assembly</span></a>
+        <li><a href="#pretrained-apis"><span class="secno">4.4.1</span> <span class="content">APIs Built on Pre-Trained Model</span></a>
+        <li><a href="#webgl"><span class="secno">4.4.2</span> <span class="content">WebGL</span></a>
+        <li><a href="#web-assembly"><span class="secno">4.4.3</span> <span class="content">Web Assembly</span></a>
+        <li><a href="#web-gpu"><span class="secno">4.4.4</span> <span class="content">WebGPU</span></a>
        </ol>
      </ol>
     <li>
-     <a href="#requirements"><span class="secno">6</span> <span class="content">Requirements</span></a>
+     <a href="#related-research"><span class="secno">5</span> <span class="content">Related Research</span></a>
      <ol class="toc">
-      <li>
-       <a href="#related-standards"><span class="secno">6.1</span> <span class="content">Related Developing Standards</span></a>
-       <ol class="toc">
-        <li><a href="#webgl①"><span class="secno">6.1.1</span> <span class="content">WebGL 2.0</span></a>
-        <li><a href="#web-assembly①"><span class="secno">6.1.2</span> <span class="content">Web Assembly 2.0</span></a>
-       </ol>
+      <li><a href="#quantization"><span class="secno">5.1</span> <span class="content">Quantization and Low Precision Arithemic</span></a>
+      <li><a href="#huffman-coding"><span class="secno">5.2</span> <span class="content">Huffman Coding</span></a>
+      <li><a href="#Discretization"><span class="secno">5.3</span> <span class="content">Discretization</span></a>
+      <li><a href="#sparse-matrix"><span class="secno">5.4</span> <span class="content">Sparse Matrix</span></a>
+      <li><a href="#other-techniques"><span class="secno">5.5</span> <span class="content">Other techniques</span></a>
      </ol>
+    <li><a href="#requirements"><span class="secno">6</span> <span class="content">Requirements</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
@@ -1401,54 +1403,269 @@ Parts of this work may be from another specification document.  If so, those par
    </ol>
   </nav>
   <main>
-   <h2 class="heading settled" data-level="1" id="abstract①"><span class="secno">1. </span><span class="content">Abstract</span><a class="self-link" href="#abstract①"></a></h2>
-   <h2 class="heading settled" data-level="2" id="status"><span class="secno">2. </span><span class="content">Status of this document</span><a class="self-link" href="#status"></a></h2>
+   <h2 class="heading settled" data-level="1" id="status"><span class="secno">1. </span><span class="content">Status of this document</span><a class="self-link" href="#status"></a></h2>
    <p>This is a <strong>really unofficial</strong> draft. It’s not meant to capture any consensus, beyond
 my own personal feelings about what sounds interesting. It is provided for discussion only and may 
 change at any moment, and should not be taken as "official" or even "unofficial, but planned". Its 
 publication here does not imply endorsement of its contents by W3C or by Microsoft. Don’t cite this 
 document other than as a collection of interesting ideas.</p>
-   <h2 class="heading settled" data-level="3" id="intro"><span class="secno">3. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
-   <p>Neural network algorithms have been significantly improved in terms of performance, reliability, and
-accuracy in recent years. While typically thought of a technology for the cloud, neural network 
-have applications on device as well. After training the network on cloud or high performance development
-environment, developers can port the network to their client applications to reap benefits such as
-performance boost. However, without system level support, developers often face 
-bottlenecks in terms of memory and/or performance. Several major platforms have since shipped system
-APIs to help mitigate the problems. For example, iOS shipped Accelerate and Basic Neural Network 
-Subroutiines. The Universal Windows Platform (UWP) has also added related libraries. Similiar APIs
-have yet to be seen on the web platform. The document describes the use cases that motivate the API,
-examines similiar APIs avaiable to native applications, discusses how web developers currently work
-around the problems, and sketches a set of requirements that would drive the related specification.
-Contributions to the document are welcomed.</p>
-   <h2 class="heading settled" data-level="4" id="introduction-to-neural-network"><span class="secno">4. </span><span class="content">Introduction to Neural Network #</span><a class="self-link" href="#introduction-to-neural-network"></a></h2>
-   <h3 class="heading settled" data-level="4.1" id="stages-of-development"><span class="secno">4.1. </span><span class="content">Stages of Development ##</span><a class="self-link" href="#stages-of-development"></a></h3>
-   <p>Training
-Inference</p>
-   <h2 class="heading settled" data-level="5" id="status-quo"><span class="secno">5. </span><span class="content">Status Quo</span><a class="self-link" href="#status-quo"></a></h2>
-   <h3 class="heading settled" data-level="5.1" id="native-platform"><span class="secno">5.1. </span><span class="content">Native Platforms</span><a class="self-link" href="#native-platform"></a></h3>
-   <p>on-device processing</p>
-   <h4 class="heading settled" data-level="5.1.1" id="known-applications"><span class="secno">5.1.1. </span><span class="content">Known Applications</span><a class="self-link" href="#known-applications"></a></h4>
-   <h4 class="heading settled" data-level="5.1.2" id="techniques"><span class="secno">5.1.2. </span><span class="content">Performance Improvement Techniques</span><a class="self-link" href="#techniques"></a></h4>
-   <h3 class="heading settled" data-level="5.2" id="web-library"><span class="secno">5.2. </span><span class="content">Web Development Library</span><a class="self-link" href="#web-library"></a></h3>
-   <p>Demo link: .</p>
-   <h4 class="heading settled" data-level="5.2.1" id="specilized-api"><span class="secno">5.2.1. </span><span class="content">Specilized API ###</span><a class="self-link" href="#specilized-api"></a></h4>
-   <p>Web Authentication api</p>
-   <p>Shape Detection API</p>
-   <p>Real Time Communication API</p>
-   <p>Web Speech API</p>
-   <h4 class="heading settled" data-level="5.2.2" id="webgl"><span class="secno">5.2.2. </span><span class="content">WebGL</span><a class="self-link" href="#webgl"></a></h4>
-   <h4 class="heading settled" data-level="5.2.3" id="web-assembly"><span class="secno">5.2.3. </span><span class="content">Web Assembly</span><a class="self-link" href="#web-assembly"></a></h4>
+   <h2 class="heading settled" data-level="2" id="intro"><span class="secno">2. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
+   <p>Machine Learning (ML) algorithms have been significantly improved in terms of accuracy, reliability,
+and performance in recent years. While typically thought of a technology for the cloud, machine 
+learning have its applications on the device as well. Developing a machine learning model usually 
+involves two stages: training and inference. When developing a ML model, developers first decide 
+on a skeleton model and feed large dataset to the model in repeated iterations to <em>train</em> the model. 
+Because of the large dataset and the many rounds of iterations needed, training is typically 
+performed in the cloud. After training, the model would then be ported to production environment 
+to <em>infer</em> insights based on real time incoming data. Inference can occur in the cloud or on the 
+device. Performing inference on the device have many desirable properties including performance 
+boost due to <a href="https://en.wikipedia.org/wiki/Edge_computing">edge computing</a>, resistance 
+toward poor or no network, and security/privacy protection etc.</p>
+   <p>Enabling machine learning on the web platform can not only supercharge existing applications but
+also unlock new scenarios. For example, with the help of service worker, developers can have their 
+text translation application to be available offline. By inferring the user’s emotions based on
+user’s input (be it text, image, or video), developers can build a rich emotional experience. 
+Applications on new frontiers such as Mixed Reaility can become much "smarter."</p>
+   <p>However, existing APIs do not offer the necessary platform level support for developers. Web
+developers face bottlenecks in terms of memory, performance, and power consumptions. A new 
+set of APIs are necessary for unlocking ML on the web. After all, major app platforms had to ship 
+new APIs for machine learning as well. It is important to note that machine learning is a broad 
+field and many recent breakthroughs come from its subfield - deep neural network (DNN). The API 
+design should therefore have an empahsis on DNNs.</p>
+   <p>This explainer aims at sparking discussions around machine learning on the web. Contributions to
+this document are welcomed.</p>
+   <p>The explainer describes the use cases and developer interests that motivate the API, examines
+existing platform support, demonstrats a few known techniques to break the performance bottlenecks,
+and sketches out a initial set of requirements for the final API design.</p>
+   <h2 class="heading settled" data-level="3" id="intro-to-ml"><span class="secno">3. </span><span class="content">Machine Learning and Neural Network</span><a class="self-link" href="#intro-to-ml"></a></h2>
+   <p>Deep Neural Networks (DNNs) on the foundation of many modern machine learning applications.</p>
+   <p>Neural network is a sub-field of machine learning.</p>
+   <h3 class="heading settled" data-level="3.1" id="stages-of-development"><span class="secno">3.1. </span><span class="content">Stages of Development</span><a class="self-link" href="#stages-of-development"></a></h3>
+   <p>Development of machine learning applications involves two stages: training and inference. Training
+the network or model involves processing the data, feeding the data to determine the appropriate
+values in the network, and determine if the accuracy of the model is sufficient. Once trained, the 
+model should be considered sufficiently accurate for it pre-determined purpose. Developers typically 
+train the network on the cloud or machines with high computing power.</p>
+   <p>Running the the model is known as inference. At this stage, developers optimize their machine
+learning models for production environment. Depending on the scenarios, developers may accept a 
+small drop of accuracy for the sake of speed or size.</p>
+   <p>After the inference period, developers can use incremental learning to improve the model
+to fit the new needs. Or developers can use transfer learning to re-apply learnings from one model
+to another model.</p>
+   <h2 class="heading settled" data-level="4" id="status-quo"><span class="secno">4. </span><span class="content">Status Quo</span><a class="self-link" href="#status-quo"></a></h2>
+   <h3 class="heading settled" data-level="4.1" id="native-platform"><span class="secno">4.1. </span><span class="content">Native Platforms</span><a class="self-link" href="#native-platform"></a></h3>
+   <p>Almost all major platforms have since shippped system level APIs to support neural network (NN)
+computation, recognizing the value of on-device NN. For example, iOS shipped <a href="https://developer.apple.com/documentation/accelerate/bnns">Basic Neural Network
+Subroutines</a> and updated the <a href="https://developer.apple.com/documentation/accelerate">Accelerate Framework</a>. The <a href="https://docs.microsoft.com/en-us/windows/uwp/get-started/universal-application-platform-guide"> Universal Windows Platform (UWP)</a> has added <a href="https://docs.microsoft.com/en-us/cognitive-toolkit/CNTK-Library-Evaluation-on-UWP">support</a> for CNTK. Android is also said to release a Deep Neural Network API soon.</p>
+   <p>Platform and developers have also built extensive framework on top of these APIs for mobile
+scenarios. Examples include Facebook’s <a href="https://code.facebook.com/posts/196146247499076/delivering-real-time-ai-in-the-palm-of-your-hand/"> Caffe2go</a>, Google’s <a href="https://www.tensorflow.org/mobile/">TensorFlow Lite</a>, Apple’s <a href="https://developer.apple.com/documentation/coreml">CoreML Framework</a>, and <a href="https://docs.microsoft.com/en-us/cognitive-toolkit/CNTK-Library-Evaluation-on-UWP">CNTK’s 
+support for UWP</a>.</p>
+   <h3 class="heading settled" data-level="4.2" id="web-developer-interest"><span class="secno">4.2. </span><span class="content">Web Developer Interests</span><a class="self-link" href="#web-developer-interest"></a></h3>
+   <p>Web developers have created many libraries or frameworks to simplify neural network development for
+web applications. For example, Andrej Karpathy developed the <a href="https://github.com/karpathy/convnetjs">ConvNetJS</a> library, which can be used to build 
+convolutional networks, deep neural networks etc. Another example is the <a href="https://github.com/cazala/synaptic">Synaptic.js</a> library, which implements a recurrent 
+neural network architecture.</p>
+   <p>Although the above libraries cover many use cases already, they do suffer from performance/memory
+bottlenecks problems. The <a href="https://github.com/transcranial/keras-js">keras.js</a> library 
+sought to address the problem by using WebGL in a clever way. Because WebGL can compute data 
+directly in GPU memory, the performance does show significant improvement in lab settings. However, 
+because WebGL cannot be accessed by WebWorkers, it can be difficult for production sites to adopt. 
+More limitations on WebGL will be discussed in the section below.</p>
+   <p>If you are interested in learning more about neural networks written in JS, please refer to this <a href="https://github.com/AngeloKai/js-ml-libraries">page</a>.</p>
+   <h3 class="heading settled" data-level="4.3" id="use-cases"><span class="secno">4.3. </span><span class="content">Use Cases</span><a class="self-link" href="#use-cases"></a></h3>
+   <p>Developers may use the API for a variety of purposes. Drawing on existing demos that are built
+by web developers and websites that use cloud-based machine learning capability, this section 
+illustrates a few sample use cases. As mentioned above, this document is meant to inspire 
+discussions in this space among browser implementers and the larger web development community, 
+I’d welcome anyone to add more use cases they can think of.</p>
+   <p>https://support.office.com/en-us/article/Where-is-the-product-Help-in-Office-2016-199950c6-1260-44fe-ba2e-e95968d05397</p>
+   <h4 class="heading settled" data-level="4.3.1" id="client-side-machine-learning"><span class="secno">4.3.1. </span><span class="content">Replicate Cloud-based Machine Learning on the Client</span><a class="self-link" href="#client-side-machine-learning"></a></h4>
+   <p>Major cloud platforms have all shipped machine learning APIs that serve a specific purpose, such as
+imagine detection API, text to speech API, text translation API. Developers can build the APIs all 
+on client-side without having to resort to the cloud. One example is the Text Translation API. The
+Google Translate app has text translation and image detection built in so that the users can use 
+their phones to capture live images and see translation right away. Another example is the emotion
+API. Developers can use the emotion to build rich emotional experiences without worrying about 
+network delay.</p>
+   <p>While the above generic API are helpful in many cases, sometimes the developers may just want a
+specific part of the functionality. For example, websites supporting dynamic video upload 
+has to ensure no obscene images or videos are uploaded for law compliance purposes. Right now the 
+websites have to let the users upload the video, create a space on the cloud for a video in a 
+segmented location, analyze the video, and, if approved, mark the video as approved. The process 
+costs millions of dollars on the server and often may lead to unsatifying experiences. Websites 
+should be able to craft the image detection api to focus only to obscene images to improve its 
+accuracy and build the capability on the front end to avoid such attacks. Another example is image
+analysis. xxx use machine learning to analyze x-ray images. Users often upload images not in the 
+desired format. Doing so directly on the cloud is helpful. Financial service industry often builds
+large scale risk models to analyze each transaction. While running the full scale risk models is 
+costly and take significant time, most transactions shouldn’t need a full scale analysis. The end 
+result shows that most transactions are benign with the exceptin of a few that are initiated by 
+malicious attackers. Developers can build a much smaller scale risk evaluation machine learning 
+model on the client for quick analysis of the transaction and wait for full transaction later on.</p>
+   <p>Mixed reality experiences can also benefit from machine learning on the front end. Rendering the
+full 3D models are often costly on the GPU. WebVR applications can use machine learning to 
+figure out when to render the image fully. "Smart" applications with the understanding of users' 
+intent will benefit from the experiences.</p>
+   <p>Developers can also build an experience that rely on both machine learning on the client
+and on the cloud. For example, the medical analysis company can use machine learning on the front
+end to quickly examine if the image is correct and wait for the more powerful cloud-based model to
+do the full analysis.</p>
+   <p>The Service Worker API has enabled a generation of applications that can function without network.
+For example, machine learning predication models can be used to predict which songs to be cached
+in anticipation of the user. Of course, given the size of many machine learning models and the 
+offline storage amount allocated per each Service Worker, this may remain distant in the near 
+future.</p>
+   <p>As illustrated above, web developers have developed machine learning frameworks and demos to
+showcase the experience. Below are some of the more notable demos:</p>
+   <p>In addition to the above examples, developers can also use the API to build a variety of other
+experiences.</p>
+   <p>Replicate Cloud-Based Machine Learning API on the Client</p>
+   <p>Web applications using machine learning have been around for years, such as Google, Youtube, etc.</p>
+   <p>At the core of machine learning is the ability to reason against a large complext set of data.
+That reasoning may happen on the fly as core part of application or as post-processing.</p>
+   <p>Developers can build three categories of machine learning experiences:</p>
+   <ol>
+    <li data-md="">
+     <p>Completely offline experience. For example, Spotify can enable users to search downloaded songs
+offline using machine learning.</p>
+    <li data-md="">
+     <p>Replicate machine learning with purely front-end code. For example, developers can build
+vision API, emotion API, etc. offline.</p>
+    <li data-md="">
+     <p>Use front-end machine learning capability in conjuction with the machine learning code on the
+cloud.</p>
+   </ol>
+   <p>Recommendation based on history of the users</p>
+   <p>Input: text, image, live stream, audio</p>
+   <h3 class="heading settled" data-level="4.4" id="related-standards"><span class="secno">4.4. </span><span class="content">Related Standards</span><a class="self-link" href="#related-standards"></a></h3>
+   <p>Many existing standards helped introduce neural network technologies into the web platform. Several
+existing APIs make use of well trained neural networks behind the scene such as the Web Speech API. 
+As mentioned above, the WebGL API are used by developers today to improve the performance of their
+neural network applications. The Web Assembly API can also be used by developers to transpile their
+existing trained networks written in C++ to binaries that can be run on the browser.</p>
+   <p>A number of developing standards may also be used by developers in their neural network
+applications.</p>
+   <p>As illustrated below, none of the current standards provide sufficent support machine learning
+on the platform. Each of them solves one subset of problem. However, a generic solution is needed.</p>
+   <h4 class="heading settled" data-level="4.4.1" id="pretrained-apis"><span class="secno">4.4.1. </span><span class="content">APIs Built on Pre-Trained Model</span><a class="self-link" href="#pretrained-apis"></a></h4>
+   <p>implement new APIs; use machine learning behind the scene; due to the advancements
+added new APIs; which relied on pre-trained machine learning models.</p>
+   <p>In the past few years, we have added several new APIs that relied on pre-trained machine learning
+models. The <a href="https://dvcs.w3.org/hg/speech-api/raw-file/tip/webspeechapi.html">Web
+Speech API</a> enables developers to easily convert text content to speech and speech content to 
+text. Both features are possible because of advancements we made in the natural language 
+processing field, a sub-field of machine learning. The <a href="https://w3c.github.io/webauthn/">Web Authentication API</a> enables web developers to 
+authenticate users with strong authenticators, such as fingerprint scanners, facial recognition
+systems etc. Biometric authenticators all employ machine learning technologies one way or another. 
+The <a href="https://github.com/WICG/shape-detection-api">Shape Detection API</a>, a recent
+addition to the <a href="https://www.w3.org/community/wicg/">Web Incubator CG</a>, allow developers
+to detect faces, barcodes, and text in live or still images. Object detection technologies are 
+often based on research in machine learning, which in turn furthered research in <a href="https://en.wikipedia.org/wiki/Image_processor">Image Signal Processors (ISPs)</a>.</p>
+   <p>One of the common motivations behind building the above APIs are the machine models are
+computationaly expensive. Yet it is unscalable to continue adding APIs to the platform for the 
+reason of computational cost. There should be a generic solution that can bring down the 
+computational cost of doing machine learning on the web platform.</p>
+   <h4 class="heading settled" data-level="4.4.2" id="webgl"><span class="secno">4.4.2. </span><span class="content">WebGL</span><a class="self-link" href="#webgl"></a></h4>
+   <p>The WebGL API was designed to render 3D and 2D graphic content and make use of GPUs behind the
+scene when necessary. Given that most of graphic processing relies on matrix computation, 
+web developers have developed libraries that wrap around WebGL to accelerate matrix computation. 
+However, as I illustrate below, such libraries are not developer-friendly and often very taxing 
+on memory. 
+Take the example of <a href="https://github.com/waylonflinn/weblas/blob/master/index.js#L59">this 
+matrix multiplication method</a>. The method has to first instantiates two RGBA texel array,
+tranpose one of the arrays, create 2 input textures and 1 output texture, activate the shader, 
+bind input texture, set shader parameters, bind output texture, and finally call drawElements to 
+calculate the matrix. After the calculation, it also has to unbind all the textures. A simple 
+matrix multiplication should only need to instantiate one new matrix in memory instead of five (
+two arrays and three textures).</p>
+   <p>Although next generation of WebGL API can include more support for direct mathmatical computation,
+one can argue that this goal is not within the charter of an API that is designed for drawing 
+graphics. In addition, the next WebGL (WebGL 3.00 are still far away given that Chrome and Firefox
+has just implemented the support for the 2.0 version earlier this year.</p>
+   <h4 class="heading settled" data-level="4.4.3" id="web-assembly"><span class="secno">4.4.3. </span><span class="content">Web Assembly</span><a class="self-link" href="#web-assembly"></a></h4>
+   <p>WebAssembly is a new low-level assembly-like language with a compact binary format and near-native
+performance. Programs written in C/C++ can be compiled directly to this format to run on the web. 
+On the browsers, WebAssembly programs run in a sandbox that can be used alongside JavaScript.</p>
+   <p>As previously stated, systemic support for Machine Learning programs should aim for allowing
+programs to have the least memory needed, provide most performance support, and preferably ease
+developer pain in importing their trained model to the web. Mainstream machine learning frameworks
+usually can produce models in C++ format. Given the above three goals, WebAssembly seems like 
+a fitting solution for ML.</p>
+   <p>However, the current WebAseembly design do have a few shortcomings when it comes to being applied
+to ML. First of all, WebAseembly does not have GPU support, a well-known performance accelerator 
+for ML. Second, WebAssembly lacks support for running in WebWorkers. Because ML models can take up to
+several hundred megabytes and unpredictable, developers should be discouraged from running the models 
+in the UI thread. Third, Bottlenecks brought by network conditions are often motivations behind
+doing ML computation on the client. Common matrix functions can be large in size. 
+Because WebAssembly is running on a blank slate, the developers have to load related libraries 
+by themselves. If the libraries are built into the platform, much less speed requirement is needed. 
+For example, developers would have to define their own matrix/format data type.</p>
+   <h4 class="heading settled" data-level="4.4.4" id="web-gpu"><span class="secno">4.4.4. </span><span class="content">WebGPU</span><a class="self-link" href="#web-gpu"></a></h4>
+   <p>WebGPU API is a new incubating API that aims at exposing modern GPU features. Its initial API set
+is a derivation from the Metal language. Prototype for the API has landed in WebKit.</p>
+   <p>Although the API aims at exposing low-level GPU functionalities, its <a href="https://webkit.org/wp-content/uploads/webgpu-api-proposal.html">initial API set is 
+primarily geared toward graphics rendering and not direct mathmatical computation. Research has 
+also shown that while GPU accelerates computing, chips can be designed in ways that make them much 
+better at machine learning computing. For example, </a><a href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)">quantization</a>, a 
+common technique to shrink number to less-than-32-bit representation, has proven to be a 
+efficient technique to reduce the size of programs. Companies have produced chips designed
+for machine learning for personal devices instead of using GPUs, such as <a href="https://www.movidius.com/technology">Movidius' (an Intel company) Myriad VPU</a>, the <a href="https://www.ibm.com/blogs/research/2016/09/deep-learning-possible-embedded-systems-thanks-truenorth/"> IBM’s TrueNorth chips</a>, or <a href="https://www.intelnervana.com/technology/">Intel’s 
+Nervana</a>If the aim of the WebGPU API is to expose interface for the modern GPU, 
+it would not be suitable for the machine learning field.</p>
+   <h2 class="heading settled" data-level="5" id="related-research"><span class="secno">5. </span><span class="content">Related Research</span><a class="self-link" href="#related-research"></a></h2>
+   <p>There has been a long line of research geared toward enabling machine learning on the client.
+I am covering a few known techniques here: quantization, low precision arithemic, sparse matrix,</p>
+   <h3 class="heading settled" data-level="5.1" id="quantization"><span class="secno">5.1. </span><span class="content">Quantization and Low Precision Arithemic</span><a class="self-link" href="#quantization"></a></h3>
+   <p>During the training period, neural network models use floating point numbers to ensure high
+accuracy. After the training period, it may not be necessary to keep high precision for the 
+inference stages. Quantization is a technique to convert high precision floating point numbers to 
+low precision numbers (usually below 32 bits).</p>
+   <p>Along with quantization, developers can use low precision arithemic to keep computation to reduce
+power consumption.</p>
+   <h3 class="heading settled" data-level="5.2" id="huffman-coding"><span class="secno">5.2. </span><span class="content">Huffman Coding</span><a class="self-link" href="#huffman-coding"></a></h3>
+   <p>"A Huffman code is an optimal prefix code commonly used for lossless data compression(Van Leeuwen,
+1976). It uses variable-length codewords to encode source symbols. Experiments
+show that Huffman coding these non-uniformly distributed values saves 20% − 30% of network
+storage."</p>
+   <h3 class="heading settled" data-level="5.3" id="Discretization"><span class="secno">5.3. </span><span class="content">Discretization</span><a class="self-link" href="#Discretization"></a></h3>
+   <p>Discretization is the process to transfer continious functions to to discrete numbers. The process
+can significantly decrease the power needed.</p>
+   <h3 class="heading settled" data-level="5.4" id="sparse-matrix"><span class="secno">5.4. </span><span class="content">Sparse Matrix</span><a class="self-link" href="#sparse-matrix"></a></h3>
+   <p>Most of machine learning problems don’t involve a densely populated matrix. Adopting sparse matrix
+data structures and specifical numerical methods for those data structures can significantly 
+reduce the size of the memory.</p>
+   <h3 class="heading settled" data-level="5.5" id="other-techniques"><span class="secno">5.5. </span><span class="content">Other techniques</span><a class="self-link" href="#other-techniques"></a></h3>
+   <p>Developers can adopt many techniques to optimize their models such as network pruning or developing
+ternary network.</p>
    <h2 class="heading settled" data-level="6" id="requirements"><span class="secno">6. </span><span class="content">Requirements</span><a class="self-link" href="#requirements"></a></h2>
-   <p>Balance between hardware acceleration and the level of abstraction needed for the web platform. As
-part of looking into the balance, we can different sets of API. We also need to make sure we don'
+   <p>As illustrated above, there is a new need for a API set designed for machine learning. We should
+be cautious in the design.</p>
+   <ol>
+    <li data-md="">
+     <p>Optimize toward reduced memory size.</p>
+    <li data-md="">
+     <p>High performance speed.</p>
+    <li data-md="">
+     <p>Balance between hardware acceleration and the level of abstraction needed for the web platform.</p>
+    <li data-md="">
+     <p>Open for wide variety of hardware support including ASICs, GPUs, and CPUs.</p>
+    <li data-md="">
+     <p>Help developers easily port apps.</p>
+    <li data-md="">
+     <p>Focus on inference instead of training.</p>
+    <li data-md="">
+     <p>Focus on enabling an initial set of experiences instead of aiming to cover all in the beginning.
+Unlike some other APIs, I’d expect machine learning to eventually be a fundamental part of the
+web platform. However, the evolution of the API will take a long time. 
+Although machine learning has been part of the web development for ages (take search engine for 
+example!), I’d like to think we are still on the early age of this development. There are many
+active researches going on. There’s a boom in terms of interests in this area so we may take a
+long time to figure it out. As we progress the API, we should have active conversations with 
+the development community, identify initial set of use cases, and develop APIs for those use
+cases. Once the use cases are satisfied, we can then move on to the next set.</p>
+   </ol>
+   <p>As part of looking into the balance, we can different sets of API. We also need to make sure we don'
 cater to one algorithm but look for broader applications.</p>
-   <p>Changing chip market.</p>
-   <p>Help developers easily port apps.</p>
-   <h3 class="heading settled" data-level="6.1" id="related-standards"><span class="secno">6.1. </span><span class="content">Related Developing Standards</span><a class="self-link" href="#related-standards"></a></h3>
-   <p>WebGPU, WebAssembly 2.0, WebGL 2.0</p>
-   <h4 class="heading settled" data-level="6.1.1" id="webgl①"><span class="secno">6.1.1. </span><span class="content">WebGL 2.0</span><a class="self-link" href="#webgl①"></a></h4>
-   <h4 class="heading settled" data-level="6.1.2" id="web-assembly①"><span class="secno">6.1.2. </span><span class="content">Web Assembly 2.0</span><a class="self-link" href="#web-assembly①"></a></h4>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>

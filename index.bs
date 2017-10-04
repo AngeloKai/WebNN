@@ -22,6 +22,3 @@ Use cases here.
 
 # Core API # {#core}
 
-## Linear Algebra ## {#linear-algebra}
-
-## ##
