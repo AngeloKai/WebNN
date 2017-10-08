@@ -72,39 +72,51 @@ spark conversations about ML on the web and additions/corrections are welcomes.
 : <dfn>deep neural networks</dfn>
 : <dfn>DNNs</dfn>
 :: A subset of neural network algorithms that use multiple layers of neural network. The use of 
-    DNNs is behind several of the recent big breakthroughs in mahcine learning. 
+    DNNs is behind several recent big breakthroughs in mahcine learning. 
 
-## Stages of Development ## {#stages-of-development}
+: <dfn>training</dfn>
+: <dfn>train</dfn>
+:: Typically the first stage during development machine learning models. Developing machine 
+    learning applications typically involve two stages: training and inference. 
+    Training the network
+    or model involves processing the data, feeding the data to determine the appropriate
+    values in the network, and determine if the accuracy of the model is sufficient. Once 
+    trained, the model should be considered sufficiently accurate for it pre-determined 
+    purpose. Because training usually involves a very large dataset and many rounds of
+    iterations, developers generally train the network on the cloud or machines with high 
+    computing power. 
 
-Development of machine learning applications involves two stages: training and inference. Training 
-the network or model involves processing the data, feeding the data to determine the appropriate
-values in the network, and determine if the accuracy of the model is sufficient. Once trained, the 
-model should be considered sufficiently accurate for it pre-determined purpose. Developers typically 
-train the network on the cloud or machines with high computing power. 
+: <dfn>inference</dfn>
+: <dfn>infer</dfn>
+:: Typically the second stage during development machine learning models. Developing machine 
+    learning applications typically involve two stages: training and inference. At 
+    this stage, developers optimize their machine learning models for production environment. 
+    Depending on the scenarios, 
+    developers may accept a small drop of accuracy for the sake of speed or size. 
 
-Running the the model is known as inference. At this stage, developers optimize their machine 
-learning models for production environment. Depending on the scenarios, developers may accept a 
-small drop of accuracy for the sake of speed or size. 
+: <dfn>incremental learning</dfn>
+:: A possible follow-up stage after the developer developed the initial model. Developers 
+    can use the incremental learning technique to improve the existing model. 
 
-After the inference period, developers can use incremental learning to improve the model
-to fit the new needs. Or developers can use transfer learning to re-apply learnings from one model
-to another model. 
-
+: <dfn>transfer learning</dfn>
+:: Developers can use a technique called transfer learning to use learning from one model to 
+    develop another model. For example, a model trained to recognize animals can be used to 
+    recognize dogs. 
 
 # Status Quo # {#status-quo}
 
 ## Native Platforms ## {#native-platform}
 
-Almost all major platforms have since shippped system level APIs to support neural network (NN)
-computation, recognizing the value of on-device NN. For example, iOS shipped 
+All native application platforms have shippped APIs to support machine
+learning and/or neural networks. For example, iOS and MacOS shipped 
 <a href="https://developer.apple.com/documentation/accelerate/bnns">Basic Neural Network
-Subroutines</a> and updated the 
-<a href="https://developer.apple.com/documentation/accelerate">Accelerate Framework</a>. The 
-<a 
-href="https://docs.microsoft.com/en-us/windows/uwp/get-started/universal-application-platform-guide">
+Subroutines (BNNS)</a> and updated 
+<a href="https://developer.apple.com/documentation/accelerate">Accelerate Framework</a>
+for <a href="https://developer.apple.com/documentation/coreml">Core ML</a>. The 
+<a href="https://docs.microsoft.com/en-us/windows/uwp/get-started/universal-application-platform-guide">
 Universal Windows Platform (UWP)</a> has added 
 <a href="https://docs.microsoft.com/en-us/cognitive-toolkit/CNTK-Library-Evaluation-on-UWP">support</a> 
-for CNTK. Android is also said to release a Deep Neural Network API soon. 
+for CNTK. Android is also said to release a Deep Neural Network API soon.
 
 Platform and developers have also built extensive framework on top of these APIs for mobile 
 scenarios. Examples include Facebook's 
@@ -117,12 +129,14 @@ support for UWP</a>.
 
 ## Web Developer Interests ## {#web-developer-interest}
 
-Web developers have created many libraries or frameworks to simplify neural network development for
-web applications. For example, Andrej Karpathy developed the 
+The web development community has shown strong interest in machine learning by creating 
+libraries or frameworks to simplify neural network development. 
+For example, Andrej Karpathy developed the 
 <a href="https://github.com/karpathy/convnetjs">ConvNetJS</a> library, which can be used to build 
 convolutional networks, deep neural networks etc. Another example is the 
 <a href="https://github.com/cazala/synaptic">Synaptic.js</a> library, which implements a recurrent 
-neural network architecture. 
+neural network architecture. For a comprehensive look at existing libraries, click 
+<a href="https://github.com/AngeloKai/js-ml-libraries">here</a>. 
 
 Although the above libraries cover many use cases already, they do suffer from performance/memory 
 bottlenecks problems. The <a href="https://github.com/transcranial/keras-js">keras.js</a> library 
@@ -131,10 +145,7 @@ directly in GPU memory, the performance does show significant improvement in lab
 because WebGL cannot be accessed by WebWorkers, it can be difficult for production sites to adopt. 
 More limitations on WebGL will be discussed in the section below. 
 
-If you are interested in learning more about neural networks written in JS, please refer to this 
-<a href="https://github.com/AngeloKai/js-ml-libraries">page</a>. 
-
-## Use Cases ## {#use-cases}
+# Use Cases # {#use-cases}
 
 Developers may use the API for a variety of purposes. Drawing on existing demos that are built 
 by web developers and websites that use cloud-based machine learning capability, this section 
@@ -144,7 +155,7 @@ I'd welcome anyone to add more use cases they can think of.
 
 https://support.office.com/en-us/article/Where-is-the-product-Help-in-Office-2016-199950c6-1260-44fe-ba2e-e95968d05397
 
-### Replicate Cloud-based Machine Learning on the Client ### {#client-side-machine-learning}
+## Replicate Cloud-based Machine Learning on the Client ## {#client-side-machine-learning}
 
 Major cloud platforms have all shipped machine learning APIs that serve a specific purpose, such as
 imagine detection API, text to speech API, text translation API. Developers can build the APIs all 
