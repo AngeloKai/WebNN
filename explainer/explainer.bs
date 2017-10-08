@@ -1,11 +1,16 @@
 <pre class='metadata'>
-Title: Base Neural Network: Use Cases and Requirements
-Shortname: base-neural-network-1
+Title: Base Machine Learning API: Use Cases and Requirements
+Shortname: base-machine-learning-1
 Level: 1
 Status: DREAM
 URL: https://angelokai.github.io/WebNN/explainer/explainer.html
 Editor: Angelo Liao, w3cid 94342, Microsoft, huliao@microsoft.com
-Abstract: A short description of your spec, one or two sentences.
+Abstract: This explainer describes the motivation for creating a new set of APIs designed to 
+    accelerate machine learning operations in web applications. Based on the motivations, it 
+    sketches out a set of requirements for designing the APIs. The APIs should remain generic
+    and baisc enough to support a broad range of machine learning functionalities. For example, 
+    providing an API for fast matrix multiplication for sparse matrix accelerates performance 
+    for a wide variety of machine learning operations. 
 Markup Shorthands: markdown yes
 </pre>
 
@@ -22,40 +27,52 @@ document other than as a collection of interesting ideas.
 Machine Learning (ML) algorithms have been significantly improved in terms of accuracy, reliability, 
 and performance in recent years. While typically thought of a technology for the cloud, machine 
 learning have its applications on the device as well. Developing a machine learning model usually 
-involves two stages: training and inference. When developing a ML model, developers first decide 
+involves two stages: training and inference. In the first stage, the developer decides
 on a skeleton model and feed large dataset to the model in repeated iterations to *train* the model. 
-Because of the large dataset and the many rounds of iterations needed, training is typically 
-performed in the cloud. After training, the model would then be ported to production environment 
-to *infer* insights based on real time incoming data. Inference can occur in the cloud or on the 
-device. Performing inference on the device have many desirable properties including performance 
+Then the model would then be ported to production environment to *infer* insights based on real 
+time incoming data. While training is typically performed on the cloud, Inference can occur in the 
+cloud or on the device. Performing inference on the device have many desirable properties including performance 
 boost due to <a href="https://en.wikipedia.org/wiki/Edge_computing">edge computing</a>, resistance 
-toward poor or no network, and security/privacy protection etc.
+toward poor or no network, and security/privacy protection, etc.
 
-Enabling machine learning on the web platform can not only supercharge existing applications but 
+Although platforms for native applications have all shipped APIs to support machine learning 
+inference on device, similiar functionalities have been missing on the web platform. Supporting 
+such functionalities can not only supercharge existing applications but 
 also unlock new scenarios. For example, with the help of service worker, developers can have their 
 text translation application to be available offline. By inferring the user's emotions based on
 user's input (be it text, image, or video), developers can build a rich emotional experience. 
 Applications on new frontiers such as Mixed Reaility can become much "smarter."
 
-However, existing APIs do not offer the necessary platform level support for developers. Web 
-developers face bottlenecks in terms of memory, performance, and power consumptions. A new 
-set of APIs are necessary for unlocking ML on the web. After all, major app platforms had to ship 
-new APIs for machine learning as well. It is important to note that machine learning is a broad 
-field and many recent breakthroughs come from its subfield - deep neural network (DNN). The API 
-design should therefore have an empahsis on DNNs. 
-
-This explainer aims at sparking discussions around machine learning on the web. Contributions to
-this document are welcomed. 
+Today when web developers want to develop machine learning models, 
+they face bottlenecks in terms of memory, performance, and power consumptions. Although 
+various existing APIs ease the pain a little, a new set of APIs are necessary for unlocking ML 
+on the web. 
 
 The explainer describes the use cases and developer interests that motivate the API, examines 
 existing platform support, demonstrats a few known techniques to break the performance bottlenecks,
-and sketches out a initial set of requirements for the final API design. 
+and sketches out a initial set of requirements for the final API design. It is important to note 
+that machine learning is a broad field. The explainer focuses on some areas (such as neural 
+network) I found particularly
+interesting but there are other areas that haven't been mentioned yet. The explainer is written to
+spark conversations about ML on the web and additions/corrections are welcomes. 
 
-# Machine Learning and Neural Network # {#intro-to-ml}
+# Terminology # {#terminology}
 
-Deep Neural Networks (DNNs) on the foundation of many modern machine learning applications. 
+: <dfn>machine learning</dfn>
+:: A field of study that gives computers the ability to learn without explicitly programmed, 
+    according to the Arthur Samuel who coined the term in 1959. This is in constrat with 
+    purpose-built software programs that has its behavior logic explicitly defined by 
+    developers. 
 
-Neural network is a sub-field of machine learning. 
+: <dfn>neural networks</dfn>
+:: A set of machine learning algorithms that take inspiration from the way brains operate. It is
+    generally believed that the main computational unit of the brain is the neurons and network
+    of neurons enable brains to "compute."
+
+: <dfn>deep neural networks</dfn>
+: <dfn>DNNs</dfn>
+:: A subset of neural network algorithms that use multiple layers of neural network. The use of 
+    DNNs is behind several of the recent big breakthroughs in mahcine learning. 
 
 ## Stages of Development ## {#stages-of-development}
 

@@ -1,7 +1,7 @@
 <!doctype html><html lang="en">
  <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-  <title>Base Neural Network: Use Cases and Requirements</title>
+  <title>Base Machine Learning API: Use Cases and Requirements</title>
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 <style data-fill-with="stylesheet">/******************************************************************************
  *                   Style sheet for the W3C specifications                   *
@@ -1178,7 +1178,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5834a15f311a639c0b59ff2edbf3a060391d15ff" name="generator">
   <link href="https://angelokai.github.io/WebNN/explainer/explainer.html" rel="canonical">
-  <meta content="52247a976c6e32dccc07c914ea7c8097ec8220ba" name="document-revision">
+  <meta content="66d835da4faf4e6589985821e934f34c15994f81" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1329,8 +1329,8 @@ pre .property::before, pre .property::after {
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"></p>
-   <h1 class="p-name no-ref" id="title">Base Neural Network: Use Cases and Requirements</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2017-10-02">2 October 2017</time></span></h2>
+   <h1 class="p-name no-ref" id="title">Base Machine Learning API: Use Cases and Requirements</h1>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2017-10-07">7 October 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1344,7 +1344,7 @@ pre .property::before, pre .property::after {
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 2 October 2017,
+In addition, as of 7 October 2017,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1352,7 +1352,13 @@ Parts of this work may be from another specification document.  If so, those par
   </div>
   <div class="p-summary" data-fill-with="abstract">
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
-   <p>A short description of your spec, one or two sentences.</p>
+   <p>This explainer describes the motivation for creating a new set of APIs designed to
+
+accelerate machine learning operations in web applications. Based on the motivations, it
+sketches out a set of requirements for designing the APIs. The APIs should remain generic
+and baisc enough to support a broad range of machine learning functionalities. For example,
+providing an API for fast matrix multiplication for sparse matrix accelerates performance
+for a wide variety of machine learning operations.</p>
   </div>
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
@@ -1361,7 +1367,7 @@ Parts of this work may be from another specification document.  If so, those par
     <li><a href="#status"><span class="secno">1</span> <span class="content">Status of this document</span></a>
     <li><a href="#intro"><span class="secno">2</span> <span class="content">Introduction</span></a>
     <li>
-     <a href="#intro-to-ml"><span class="secno">3</span> <span class="content">Machine Learning and Neural Network</span></a>
+     <a href="#terminology"><span class="secno">3</span> <span class="content">Terminology</span></a>
      <ol class="toc">
       <li><a href="#stages-of-development"><span class="secno">3.1</span> <span class="content">Stages of Development</span></a>
      </ol>
@@ -1396,6 +1402,11 @@ Parts of this work may be from another specification document.  If so, those par
     <li><a href="#requirements"><span class="secno">6</span> <span class="content">Requirements</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
+     <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
+     <ol class="toc">
+      <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
+     </ol>
+    <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
       <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
@@ -1413,33 +1424,50 @@ document other than as a collection of interesting ideas.</p>
    <p>Machine Learning (ML) algorithms have been significantly improved in terms of accuracy, reliability,
 and performance in recent years. While typically thought of a technology for the cloud, machine 
 learning have its applications on the device as well. Developing a machine learning model usually 
-involves two stages: training and inference. When developing a ML model, developers first decide 
+involves two stages: training and inference. In the first stage, the developer decides
 on a skeleton model and feed large dataset to the model in repeated iterations to <em>train</em> the model. 
-Because of the large dataset and the many rounds of iterations needed, training is typically 
-performed in the cloud. After training, the model would then be ported to production environment 
-to <em>infer</em> insights based on real time incoming data. Inference can occur in the cloud or on the 
-device. Performing inference on the device have many desirable properties including performance 
+Then the model would then be ported to production environment to <em>infer</em> insights based on real 
+time incoming data. While training is typically performed on the cloud, Inference can occur in the 
+cloud or on the device. Performing inference on the device have many desirable properties including performance 
 boost due to <a href="https://en.wikipedia.org/wiki/Edge_computing">edge computing</a>, resistance 
-toward poor or no network, and security/privacy protection etc.</p>
-   <p>Enabling machine learning on the web platform can not only supercharge existing applications but
+toward poor or no network, and security/privacy protection, etc.</p>
+   <p>Although platforms for native applications have all shipped APIs to support machine learning
+inference on device, similiar functionalities have been missing on the web platform. Supporting 
+such functionalities can not only supercharge existing applications but 
 also unlock new scenarios. For example, with the help of service worker, developers can have their 
 text translation application to be available offline. By inferring the user’s emotions based on
 user’s input (be it text, image, or video), developers can build a rich emotional experience. 
 Applications on new frontiers such as Mixed Reaility can become much "smarter."</p>
-   <p>However, existing APIs do not offer the necessary platform level support for developers. Web
-developers face bottlenecks in terms of memory, performance, and power consumptions. A new 
-set of APIs are necessary for unlocking ML on the web. After all, major app platforms had to ship 
-new APIs for machine learning as well. It is important to note that machine learning is a broad 
-field and many recent breakthroughs come from its subfield - deep neural network (DNN). The API 
-design should therefore have an empahsis on DNNs.</p>
-   <p>This explainer aims at sparking discussions around machine learning on the web. Contributions to
-this document are welcomed.</p>
+   <p>Today when web developers want to develop machine learning models,
+they face bottlenecks in terms of memory, performance, and power consumptions. Although 
+various existing APIs ease the pain a little, a new set of APIs are necessary for unlocking ML 
+on the web.</p>
    <p>The explainer describes the use cases and developer interests that motivate the API, examines
 existing platform support, demonstrats a few known techniques to break the performance bottlenecks,
-and sketches out a initial set of requirements for the final API design.</p>
-   <h2 class="heading settled" data-level="3" id="intro-to-ml"><span class="secno">3. </span><span class="content">Machine Learning and Neural Network</span><a class="self-link" href="#intro-to-ml"></a></h2>
-   <p>Deep Neural Networks (DNNs) on the foundation of many modern machine learning applications.</p>
-   <p>Neural network is a sub-field of machine learning.</p>
+and sketches out a initial set of requirements for the final API design. It is important to note 
+that machine learning is a broad field. The explainer focuses on some areas (such as neural 
+network) I found particularly
+interesting but there are other areas that haven’t been mentioned yet. The explainer is written to
+spark conversations about ML on the web and additions/corrections are welcomes.</p>
+   <h2 class="heading settled" data-level="3" id="terminology"><span class="secno">3. </span><span class="content">Terminology</span><a class="self-link" href="#terminology"></a></h2>
+   <dl>
+    <dt data-md=""><dfn data-dfn-type="dfn" data-noexport="" id="machine-learning">machine learning<a class="self-link" href="#machine-learning"></a></dfn>
+    <dd data-md="">
+     <p>A field of study that gives computers the ability to learn without explicitly programmed,
+according to the Arthur Samuel who coined the term in 1959. This is in constrat with 
+purpose-built software programs that has its behavior logic explicitly defined by 
+developers.</p>
+    <dt data-md=""><dfn data-dfn-type="dfn" data-noexport="" id="neural-networks">neural networks<a class="self-link" href="#neural-networks"></a></dfn>
+    <dd data-md="">
+     <p>A set of machine learning algorithms that take inspiration from the way brains operate. It is
+generally believed that the main computational unit of the brain is the neurons and network
+of neurons enable brains to "compute."</p>
+    <dt data-md=""><dfn data-dfn-type="dfn" data-noexport="" id="deep-neural-networks">deep neural networks<a class="self-link" href="#deep-neural-networks"></a></dfn>
+    <dt data-md=""><dfn data-dfn-type="dfn" data-noexport="" id="dnns">DNNs<a class="self-link" href="#dnns"></a></dfn>
+    <dd data-md="">
+     <p>A subset of neural network algorithms that use multiple layers of neural network. The use of
+DNNs is behind several of the recent big breakthroughs in mahcine learning.</p>
+   </dl>
    <h3 class="heading settled" data-level="3.1" id="stages-of-development"><span class="secno">3.1. </span><span class="content">Stages of Development</span><a class="self-link" href="#stages-of-development"></a></h3>
    <p>Development of machine learning applications involves two stages: training and inference. Training
 the network or model involves processing the data, feeding the data to determine the appropriate
@@ -1813,6 +1841,14 @@ cater to one algorithm but look for broader applications.</p>
 
 })();
 </script>
+  <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
+  <ul class="index">
+   <li><a href="#deep-neural-networks">deep neural networks</a><span>, in §3</span>
+   <li><a href="#dnns">DNNs</a><span>, in §3</span>
+   <li><a href="#machine-learning">machine learning</a><span>, in §3</span>
+   <li><a href="#neural-networks">neural networks</a><span>, in §3</span>
+  </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
