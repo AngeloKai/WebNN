@@ -147,86 +147,73 @@ More limitations on WebGL will be discussed in the section below.
 
 # Use Cases # {#use-cases}
 
-Developers may use the API for a variety of purposes. Drawing on existing demos that are built 
-by web developers and websites that use cloud-based machine learning capability, this section 
+Developers may use machine learning for a variety of purposes. Drawing inspirations from existing 
+demos and production sites/apps, this section 
 illustrates a few sample use cases. As mentioned above, this document is meant to inspire 
-discussions in this space among browser implementers and the larger web development community, 
-I'd welcome anyone to add more use cases they can think of. 
+discussions in this space among browser vendors and the web development community.
 
-https://support.office.com/en-us/article/Where-is-the-product-Help-in-Office-2016-199950c6-1260-44fe-ba2e-e95968d05397
+## Offline Recommendation Engine ## {#offline-recommendation}
 
-## Replicate Cloud-based Machine Learning on the Client ## {#client-side-machine-learning}
+A web application built with Service Work to be network resistant may wish to build its 
+recommendation engine offline. For example, a site serving images/GIFs/video as content may 
+wish to serve users smart content feed with content cached with Service Worker. Or a productivity
+application with many different features like Office may wish to provide 
+<a href="https://support.office.com/en-us/article/Where-is-the-product-Help-in-Office-2016-199950c6-1260-44fe-ba2e-e95968d05397">Help</a> when user is 
+for users looking to know which feature when the user is offline or traveling with poor network. 
 
-Major cloud platforms have all shipped machine learning APIs that serve a specific purpose, such as
-imagine detection API, text to speech API, text translation API. Developers can build the APIs all 
-on client-side without having to resort to the cloud. One example is the Text Translation API. The
-Google Translate app has text translation and image detection built in so that the users can use 
-their phones to capture live images and see translation right away. Another example is the emotion
-API. Developers can use the emotion to build rich emotional experiences without worrying about 
-network delay. 
+## Text Translation ## {#text-translation}
 
-While the above generic API are helpful in many cases, sometimes the developers may just want a 
-specific part of the functionality. For example, websites supporting dynamic video upload 
-has to ensure no obscene images or videos are uploaded for law compliance purposes. Right now the 
-websites have to let the users upload the video, create a space on the cloud for a video in a 
-segmented location, analyze the video, and, if approved, mark the video as approved. The process 
-costs millions of dollars on the server and often may lead to unsatifying experiences. Websites 
-should be able to craft the image detection api to focus only to obscene images to improve its 
-accuracy and build the capability on the front end to avoid such attacks. Another example is image
-analysis. xxx use machine learning to analyze x-ray images. Users often upload images not in the 
-desired format. Doing so directly on the cloud is helpful. Financial service industry often builds
-large scale risk models to analyze each transaction. While running the full scale risk models is 
-costly and take significant time, most transactions shouldn't need a full scale analysis. The end 
-result shows that most transactions are benign with the exceptin of a few that are initiated by 
-malicious attackers. Developers can build a much smaller scale risk evaluation machine learning 
-model on the client for quick analysis of the transaction and wait for full transaction later on. 
+A web application may wish to translate text from one language to another offline. 
+The Google Translate service trained a machine learning model to translate between languages 
+and ported the model to its mobile app. The mobile app can be used offline, though translation
+may be better online. 
 
-Mixed reality experiences can also benefit from machine learning on the front end. Rendering the 
-full 3D models are often costly on the GPU. WebVR applications can use machine learning to 
-figure out when to render the image fully. "Smart" applications with the understanding of users' 
-intent will benefit from the experiences. 
+## Object Detection from Images/Videos ## {#object-detection}
 
-Developers can also build an experience that rely on both machine learning on the client 
-and on the cloud. For example, the medical analysis company can use machine learning on the front
-end to quickly examine if the image is correct and wait for the more powerful cloud-based model to
-do the full analysis. 
+A web application may wish to recognize objects from images or videos. For example, 
+<a href="https://en.wikipedia.org/wiki/Baidu">Baidu</a> built
+convolutional neural networks (CNNs) into its mobile app so that the app can detect the main 
+object
+in the live camera feed and search related merchandise based on the result
+(<a href="https://github.com/baidu/mobile-deep-learning">baidu deep learning framework</a>). 
 
-The Service Worker API has enabled a generation of applications that can function without network. 
-For example, machine learning predication models can be used to predict which songs to be cached
-in anticipation of the user. Of course, given the size of many machine learning models and the 
-offline storage amount allocated per each Service Worker, this may remain distant in the near 
-future. 
+In addition to generic object recognition, an application may wish to train their model to 
+focus on a few classes of objects for the sake of more specific classification. For example, 
+an application may want to let users give their credit card number with live camera feed. 
+A generic text detection model may be a lot less accurate than a specific model trained with 
+only credit card numbers. Or a web application for streaming/uploading videos may wish to p
+erform live check of 
+the camera feed to ensure the user isn't showing obscene content for law compliance purpose. 
+Or a web application may allow users to diagnose whether they likely have skin cancers themselves 
+with live camera feed 
+(<a href="http://www.nature.com/nature/journal/v542/n7639/full/nature21056.html?foxtrotcallback=true">Esteve et al, 2017</a>). 
 
-As illustrated above, web developers have developed machine learning frameworks and demos to 
-showcase the experience. Below are some of the more notable demos: 
+An application may also wish to let the front-end code to do identification and leave the 
+task of classification to the back-end. Object detection usually consists of two stages: 
+identification and classification. The detection model first *identifies* the objects in an image
+and then *classifies* the objects to know whether the object is an animal. For example, in the above
+skin cancer recognition example, the application may wish to let the front-end code to identify 
+the mole and leave the task of classifying whether there's cancer to the back-end. 
 
-In addition to the above examples, developers can also use the API to build a variety of other 
-experiences. 
+## Risk Analysis ## {#risk-analysis}
 
+A web application may wish to deploy a small scale risk analysis model to determine whether the
+transaction should be pre-approved and leave the final decision to the full-scale risk models on
+the backend. Quick pre-approval improves user experience while reduce cost for running the model. 
 
-Replicate Cloud-Based Machine Learning API on the Client 
+## Rich Interactive Experience ## {#emotional-experience}
 
+A web application may wish to detect user's emotion based on user input and dynamically change 
+the interaction model. For example, a social media site may wish to detect user's emotion when
+user's typing the post and recommend the right emoji to use. If the user wishes to post picture
+alongside the post, the application can also recommend appropriately based on the post. 
 
+## Mixed Reality Experience ## {#mixed-reality}
 
-Web applications using machine learning have been around for years, such as Google, Youtube, etc. 
+A web application built for mixed reality platforms may wish to leverage machine learning to 
+anticipate user intention and movement in order to cleverly render content.
 
-
-At the core of machine learning is the ability to reason against a large complext set of data. 
-That reasoning may happen on the fly as core part of application or as post-processing. 
-
-Developers can build three categories of machine learning experiences: 
-1. Completely offline experience. For example, Spotify can enable users to search downloaded songs
-    offline using machine learning. 
-1. Replicate machine learning with purely front-end code. For example, developers can build 
-    vision API, emotion API, etc. offline. 
-1. Use front-end machine learning capability in conjuction with the machine learning code on the 
-    cloud. 
-
-Recommendation based on history of the users 
-
-Input: text, image, live stream, audio 
-
-## Related Standards ## {#related-standards}
+# Existing Standards # {#related-standards}
 
 Many existing standards helped introduce neural network technologies into the web platform. Several 
 existing APIs make use of well trained neural networks behind the scene such as the Web Speech API. 
@@ -240,7 +227,7 @@ applications.
 As illustrated below, none of the current standards provide sufficent support machine learning
 on the platform. Each of them solves one subset of problem. However, a generic solution is needed. 
 
-### APIs Built on Pre-Trained Model ### {#pretrained-apis}
+## APIs Built on Pre-Trained Model ## {#pretrained-apis}
 
 implement new APIs; use machine learning behind the scene; due to the advancements 
 added new APIs; which relied on pre-trained machine learning models. 
@@ -264,7 +251,7 @@ computationaly expensive. Yet it is unscalable to continue adding APIs to the pl
 reason of computational cost. There should be a generic solution that can bring down the 
 computational cost of doing machine learning on the web platform. 
 
-### WebGL ### {#webgl}
+## WebGL ## {#webgl}
 
 The WebGL API was designed to render 3D and 2D graphic content and make use of GPUs behind the 
 scene when necessary. Given that most of graphic processing relies on matrix computation, 
@@ -284,7 +271,7 @@ one can argue that this goal is not within the charter of an API that is designe
 graphics. In addition, the next WebGL (WebGL 3.00 are still far away given that Chrome and Firefox
 has just implemented the support for the 2.0 version earlier this year. 
 
-### Web Assembly ### {#web-assembly}
+## Web Assembly ## {#web-assembly}
 
 WebAssembly is a new low-level assembly-like language with a compact binary format and near-native
 performance. Programs written in C/C++ can be compiled directly to this format to run on the web. 
@@ -306,7 +293,7 @@ Because WebAssembly is running on a blank slate, the developers have to load rel
 by themselves. If the libraries are built into the platform, much less speed requirement is needed. 
 For example, developers would have to define their own matrix/format data type. 
 
-### WebGPU ### {#web-gpu}
+## WebGPU ## {#web-gpu}
 
 WebGPU API is a new incubating API that aims at exposing modern GPU features. Its initial API set
 is a derivation from the Metal language. Prototype for the API has landed in WebKit. 

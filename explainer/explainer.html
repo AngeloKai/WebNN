@@ -1178,7 +1178,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5834a15f311a639c0b59ff2edbf3a060391d15ff" name="generator">
   <link href="https://angelokai.github.io/WebNN/explainer/explainer.html" rel="canonical">
-  <meta content="000be1dc453a79b76f47f5752740c97eb7271397" name="document-revision">
+  <meta content="5747b381f6b53bee5c7bd63406a3a106faf6de0b" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1330,7 +1330,7 @@ pre .property::before, pre .property::after {
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Base Machine Learning API: Use Cases and Requirements</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2017-10-07">7 October 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2017-10-08">8 October 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1344,7 +1344,7 @@ pre .property::before, pre .property::after {
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 7 October 2017,
+In addition, as of 8 October 2017,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1376,26 +1376,31 @@ for a wide variety of machine learning operations.</p>
     <li>
      <a href="#use-cases"><span class="secno">5</span> <span class="content">Use Cases</span></a>
      <ol class="toc">
-      <li><a href="#client-side-machine-learning"><span class="secno">5.1</span> <span class="content">Replicate Cloud-based Machine Learning on the Client</span></a>
-      <li>
-       <a href="#related-standards"><span class="secno">5.2</span> <span class="content">Related Standards</span></a>
-       <ol class="toc">
-        <li><a href="#pretrained-apis"><span class="secno">5.2.1</span> <span class="content">APIs Built on Pre-Trained Model</span></a>
-        <li><a href="#webgl"><span class="secno">5.2.2</span> <span class="content">WebGL</span></a>
-        <li><a href="#web-assembly"><span class="secno">5.2.3</span> <span class="content">Web Assembly</span></a>
-        <li><a href="#web-gpu"><span class="secno">5.2.4</span> <span class="content">WebGPU</span></a>
-       </ol>
+      <li><a href="#offline-recommendation"><span class="secno">5.1</span> <span class="content">Offline Recommendation Engine</span></a>
+      <li><a href="#text-translation"><span class="secno">5.2</span> <span class="content">Text Translation</span></a>
+      <li><a href="#object-detection"><span class="secno">5.3</span> <span class="content">Object Detection from Images/Videos</span></a>
+      <li><a href="#risk-analysis"><span class="secno">5.4</span> <span class="content">Risk Analysis</span></a>
+      <li><a href="#emotional-experience"><span class="secno">5.5</span> <span class="content">Rich Interactive Experience</span></a>
+      <li><a href="#mixed-reality"><span class="secno">5.6</span> <span class="content">Mixed Reality Experience</span></a>
      </ol>
     <li>
-     <a href="#related-research"><span class="secno">6</span> <span class="content">Related Research</span></a>
+     <a href="#related-standards"><span class="secno">6</span> <span class="content">Existing Standards</span></a>
      <ol class="toc">
-      <li><a href="#quantization"><span class="secno">6.1</span> <span class="content">Quantization and Low Precision Arithemic</span></a>
-      <li><a href="#huffman-coding"><span class="secno">6.2</span> <span class="content">Huffman Coding</span></a>
-      <li><a href="#Discretization"><span class="secno">6.3</span> <span class="content">Discretization</span></a>
-      <li><a href="#sparse-matrix"><span class="secno">6.4</span> <span class="content">Sparse Matrix</span></a>
-      <li><a href="#other-techniques"><span class="secno">6.5</span> <span class="content">Other techniques</span></a>
+      <li><a href="#pretrained-apis"><span class="secno">6.1</span> <span class="content">APIs Built on Pre-Trained Model</span></a>
+      <li><a href="#webgl"><span class="secno">6.2</span> <span class="content">WebGL</span></a>
+      <li><a href="#web-assembly"><span class="secno">6.3</span> <span class="content">Web Assembly</span></a>
+      <li><a href="#web-gpu"><span class="secno">6.4</span> <span class="content">WebGPU</span></a>
      </ol>
-    <li><a href="#requirements"><span class="secno">7</span> <span class="content">Requirements</span></a>
+    <li>
+     <a href="#related-research"><span class="secno">7</span> <span class="content">Related Research</span></a>
+     <ol class="toc">
+      <li><a href="#quantization"><span class="secno">7.1</span> <span class="content">Quantization and Low Precision Arithemic</span></a>
+      <li><a href="#huffman-coding"><span class="secno">7.2</span> <span class="content">Huffman Coding</span></a>
+      <li><a href="#Discretization"><span class="secno">7.3</span> <span class="content">Discretization</span></a>
+      <li><a href="#sparse-matrix"><span class="secno">7.4</span> <span class="content">Sparse Matrix</span></a>
+      <li><a href="#other-techniques"><span class="secno">7.5</span> <span class="content">Other techniques</span></a>
+     </ol>
+    <li><a href="#requirements"><span class="secno">8</span> <span class="content">Requirements</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -1514,71 +1519,56 @@ directly in GPU memory, the performance does show significant improvement in lab
 because WebGL cannot be accessed by WebWorkers, it can be difficult for production sites to adopt. 
 More limitations on WebGL will be discussed in the section below.</p>
    <h2 class="heading settled" data-level="5" id="use-cases"><span class="secno">5. </span><span class="content">Use Cases</span><a class="self-link" href="#use-cases"></a></h2>
-   <p>Developers may use the API for a variety of purposes. Drawing on existing demos that are built
-by web developers and websites that use cloud-based machine learning capability, this section 
+   <p>Developers may use machine learning for a variety of purposes. Drawing inspirations from existing
+demos and production sites/apps, this section 
 illustrates a few sample use cases. As mentioned above, this document is meant to inspire 
-discussions in this space among browser implementers and the larger web development community, 
-I’d welcome anyone to add more use cases they can think of.</p>
-   <p>https://support.office.com/en-us/article/Where-is-the-product-Help-in-Office-2016-199950c6-1260-44fe-ba2e-e95968d05397</p>
-   <h3 class="heading settled" data-level="5.1" id="client-side-machine-learning"><span class="secno">5.1. </span><span class="content">Replicate Cloud-based Machine Learning on the Client</span><a class="self-link" href="#client-side-machine-learning"></a></h3>
-   <p>Major cloud platforms have all shipped machine learning APIs that serve a specific purpose, such as
-imagine detection API, text to speech API, text translation API. Developers can build the APIs all 
-on client-side without having to resort to the cloud. One example is the Text Translation API. The
-Google Translate app has text translation and image detection built in so that the users can use 
-their phones to capture live images and see translation right away. Another example is the emotion
-API. Developers can use the emotion to build rich emotional experiences without worrying about 
-network delay.</p>
-   <p>While the above generic API are helpful in many cases, sometimes the developers may just want a
-specific part of the functionality. For example, websites supporting dynamic video upload 
-has to ensure no obscene images or videos are uploaded for law compliance purposes. Right now the 
-websites have to let the users upload the video, create a space on the cloud for a video in a 
-segmented location, analyze the video, and, if approved, mark the video as approved. The process 
-costs millions of dollars on the server and often may lead to unsatifying experiences. Websites 
-should be able to craft the image detection api to focus only to obscene images to improve its 
-accuracy and build the capability on the front end to avoid such attacks. Another example is image
-analysis. xxx use machine learning to analyze x-ray images. Users often upload images not in the 
-desired format. Doing so directly on the cloud is helpful. Financial service industry often builds
-large scale risk models to analyze each transaction. While running the full scale risk models is 
-costly and take significant time, most transactions shouldn’t need a full scale analysis. The end 
-result shows that most transactions are benign with the exceptin of a few that are initiated by 
-malicious attackers. Developers can build a much smaller scale risk evaluation machine learning 
-model on the client for quick analysis of the transaction and wait for full transaction later on.</p>
-   <p>Mixed reality experiences can also benefit from machine learning on the front end. Rendering the
-full 3D models are often costly on the GPU. WebVR applications can use machine learning to 
-figure out when to render the image fully. "Smart" applications with the understanding of users' 
-intent will benefit from the experiences.</p>
-   <p>Developers can also build an experience that rely on both machine learning on the client
-and on the cloud. For example, the medical analysis company can use machine learning on the front
-end to quickly examine if the image is correct and wait for the more powerful cloud-based model to
-do the full analysis.</p>
-   <p>The Service Worker API has enabled a generation of applications that can function without network.
-For example, machine learning predication models can be used to predict which songs to be cached
-in anticipation of the user. Of course, given the size of many machine learning models and the 
-offline storage amount allocated per each Service Worker, this may remain distant in the near 
-future.</p>
-   <p>As illustrated above, web developers have developed machine learning frameworks and demos to
-showcase the experience. Below are some of the more notable demos:</p>
-   <p>In addition to the above examples, developers can also use the API to build a variety of other
-experiences.</p>
-   <p>Replicate Cloud-Based Machine Learning API on the Client</p>
-   <p>Web applications using machine learning have been around for years, such as Google, Youtube, etc.</p>
-   <p>At the core of machine learning is the ability to reason against a large complext set of data.
-That reasoning may happen on the fly as core part of application or as post-processing.</p>
-   <p>Developers can build three categories of machine learning experiences:</p>
-   <ol>
-    <li data-md="">
-     <p>Completely offline experience. For example, Spotify can enable users to search downloaded songs
-offline using machine learning.</p>
-    <li data-md="">
-     <p>Replicate machine learning with purely front-end code. For example, developers can build
-vision API, emotion API, etc. offline.</p>
-    <li data-md="">
-     <p>Use front-end machine learning capability in conjuction with the machine learning code on the
-cloud.</p>
-   </ol>
-   <p>Recommendation based on history of the users</p>
-   <p>Input: text, image, live stream, audio</p>
-   <h3 class="heading settled" data-level="5.2" id="related-standards"><span class="secno">5.2. </span><span class="content">Related Standards</span><a class="self-link" href="#related-standards"></a></h3>
+discussions in this space among browser vendors and the web development community.</p>
+   <h3 class="heading settled" data-level="5.1" id="offline-recommendation"><span class="secno">5.1. </span><span class="content">Offline Recommendation Engine</span><a class="self-link" href="#offline-recommendation"></a></h3>
+   <p>A web application built with Service Work to be network resistant may wish to build its
+recommendation engine offline. For example, a site serving images/GIFs/video as content may 
+wish to serve users smart content feed with content cached with Service Worker. Or a productivity
+application with many different features like Office may wish to provide <a href="https://support.office.com/en-us/article/Where-is-the-product-Help-in-Office-2016-199950c6-1260-44fe-ba2e-e95968d05397">Help</a> when user is 
+for users looking to know which feature when the user is offline or traveling with poor network.</p>
+   <h3 class="heading settled" data-level="5.2" id="text-translation"><span class="secno">5.2. </span><span class="content">Text Translation</span><a class="self-link" href="#text-translation"></a></h3>
+   <p>A web application may wish to translate text from one language to another offline.
+The Google Translate service trained a machine learning model to translate between languages 
+and ported the model to its mobile app. The mobile app can be used offline, though translation
+may be better online.</p>
+   <h3 class="heading settled" data-level="5.3" id="object-detection"><span class="secno">5.3. </span><span class="content">Object Detection from Images/Videos</span><a class="self-link" href="#object-detection"></a></h3>
+   <p>A web application may wish to recognize objects from images or videos. For example, <a href="https://en.wikipedia.org/wiki/Baidu">Baidu</a> built
+convolutional neural networks (CNNs) into its mobile app so that the app can detect the main 
+object
+in the live camera feed and search related merchandise based on the result
+(<a href="https://github.com/baidu/mobile-deep-learning">baidu deep learning framework</a>).</p>
+   <p>In addition to generic object recognition, an application may wish to train their model to
+focus on a few classes of objects for the sake of more specific classification. For example, 
+an application may want to let users give their credit card number with live camera feed. 
+A generic text detection model may be a lot less accurate than a specific model trained with 
+only credit card numbers. Or a web application for streaming/uploading videos may wish to p
+erform live check of 
+the camera feed to ensure the user isn’t showing obscene content for law compliance purpose. 
+Or a web application may allow users to diagnose whether they likely have skin cancers themselves 
+with live camera feed 
+(<a href="http://www.nature.com/nature/journal/v542/n7639/full/nature21056.html?foxtrotcallback=true">Esteve et al, 2017</a>).</p>
+   <p>An application may also wish to let the front-end code to do identification and leave the
+task of classification to the back-end. Object detection usually consists of two stages: 
+identification and classification. The detection model first <em>identifies</em> the objects in an image
+and then <em>classifies</em> the objects to know whether the object is an animal. For example, in the above
+skin cancer recognition example, the application may wish to let the front-end code to identify 
+the mole and leave the task of classifying whether there’s cancer to the back-end.</p>
+   <h3 class="heading settled" data-level="5.4" id="risk-analysis"><span class="secno">5.4. </span><span class="content">Risk Analysis</span><a class="self-link" href="#risk-analysis"></a></h3>
+   <p>A web application may wish to deploy a small scale risk analysis model to determine whether the
+transaction should be pre-approved and leave the final decision to the full-scale risk models on
+the backend. Quick pre-approval improves user experience while reduce cost for running the model.</p>
+   <h3 class="heading settled" data-level="5.5" id="emotional-experience"><span class="secno">5.5. </span><span class="content">Rich Interactive Experience</span><a class="self-link" href="#emotional-experience"></a></h3>
+   <p>A web application may wish to detect user’s emotion based on user input and dynamically change
+the interaction model. For example, a social media site may wish to detect user’s emotion when
+user’s typing the post and recommend the right emoji to use. If the user wishes to post picture
+alongside the post, the application can also recommend appropriately based on the post.</p>
+   <h3 class="heading settled" data-level="5.6" id="mixed-reality"><span class="secno">5.6. </span><span class="content">Mixed Reality Experience</span><a class="self-link" href="#mixed-reality"></a></h3>
+   <p>A web application built for mixed reality platforms may wish to leverage machine learning to
+anticipate user intention and movement in order to cleverly render content.</p>
+   <h2 class="heading settled" data-level="6" id="related-standards"><span class="secno">6. </span><span class="content">Existing Standards</span><a class="self-link" href="#related-standards"></a></h2>
    <p>Many existing standards helped introduce neural network technologies into the web platform. Several
 existing APIs make use of well trained neural networks behind the scene such as the Web Speech API. 
 As mentioned above, the WebGL API are used by developers today to improve the performance of their
@@ -1588,7 +1578,7 @@ existing trained networks written in C++ to binaries that can be run on the brow
 applications.</p>
    <p>As illustrated below, none of the current standards provide sufficent support machine learning
 on the platform. Each of them solves one subset of problem. However, a generic solution is needed.</p>
-   <h4 class="heading settled" data-level="5.2.1" id="pretrained-apis"><span class="secno">5.2.1. </span><span class="content">APIs Built on Pre-Trained Model</span><a class="self-link" href="#pretrained-apis"></a></h4>
+   <h3 class="heading settled" data-level="6.1" id="pretrained-apis"><span class="secno">6.1. </span><span class="content">APIs Built on Pre-Trained Model</span><a class="self-link" href="#pretrained-apis"></a></h3>
    <p>implement new APIs; use machine learning behind the scene; due to the advancements
 added new APIs; which relied on pre-trained machine learning models.</p>
    <p>In the past few years, we have added several new APIs that relied on pre-trained machine learning
@@ -1606,7 +1596,7 @@ often based on research in machine learning, which in turn furthered research in
 computationaly expensive. Yet it is unscalable to continue adding APIs to the platform for the 
 reason of computational cost. There should be a generic solution that can bring down the 
 computational cost of doing machine learning on the web platform.</p>
-   <h4 class="heading settled" data-level="5.2.2" id="webgl"><span class="secno">5.2.2. </span><span class="content">WebGL</span><a class="self-link" href="#webgl"></a></h4>
+   <h3 class="heading settled" data-level="6.2" id="webgl"><span class="secno">6.2. </span><span class="content">WebGL</span><a class="self-link" href="#webgl"></a></h3>
    <p>The WebGL API was designed to render 3D and 2D graphic content and make use of GPUs behind the
 scene when necessary. Given that most of graphic processing relies on matrix computation, 
 web developers have developed libraries that wrap around WebGL to accelerate matrix computation. 
@@ -1623,7 +1613,7 @@ two arrays and three textures).</p>
 one can argue that this goal is not within the charter of an API that is designed for drawing 
 graphics. In addition, the next WebGL (WebGL 3.00 are still far away given that Chrome and Firefox
 has just implemented the support for the 2.0 version earlier this year.</p>
-   <h4 class="heading settled" data-level="5.2.3" id="web-assembly"><span class="secno">5.2.3. </span><span class="content">Web Assembly</span><a class="self-link" href="#web-assembly"></a></h4>
+   <h3 class="heading settled" data-level="6.3" id="web-assembly"><span class="secno">6.3. </span><span class="content">Web Assembly</span><a class="self-link" href="#web-assembly"></a></h3>
    <p>WebAssembly is a new low-level assembly-like language with a compact binary format and near-native
 performance. Programs written in C/C++ can be compiled directly to this format to run on the web. 
 On the browsers, WebAssembly programs run in a sandbox that can be used alongside JavaScript.</p>
@@ -1641,7 +1631,7 @@ doing ML computation on the client. Common matrix functions can be large in size
 Because WebAssembly is running on a blank slate, the developers have to load related libraries 
 by themselves. If the libraries are built into the platform, much less speed requirement is needed. 
 For example, developers would have to define their own matrix/format data type.</p>
-   <h4 class="heading settled" data-level="5.2.4" id="web-gpu"><span class="secno">5.2.4. </span><span class="content">WebGPU</span><a class="self-link" href="#web-gpu"></a></h4>
+   <h3 class="heading settled" data-level="6.4" id="web-gpu"><span class="secno">6.4. </span><span class="content">WebGPU</span><a class="self-link" href="#web-gpu"></a></h3>
    <p>WebGPU API is a new incubating API that aims at exposing modern GPU features. Its initial API set
 is a derivation from the Metal language. Prototype for the API has landed in WebKit.</p>
    <p>Although the API aims at exposing low-level GPU functionalities, its <a href="https://webkit.org/wp-content/uploads/webgpu-api-proposal.html">initial API set is 
@@ -1653,32 +1643,32 @@ efficient technique to reduce the size of programs. Companies have produced chip
 for machine learning for personal devices instead of using GPUs, such as <a href="https://www.movidius.com/technology">Movidius' (an Intel company) Myriad VPU</a>, the <a href="https://www.ibm.com/blogs/research/2016/09/deep-learning-possible-embedded-systems-thanks-truenorth/"> IBM’s TrueNorth chips</a>, or <a href="https://www.intelnervana.com/technology/">Intel’s 
 Nervana</a>If the aim of the WebGPU API is to expose interface for the modern GPU, 
 it would not be suitable for the machine learning field.</p>
-   <h2 class="heading settled" data-level="6" id="related-research"><span class="secno">6. </span><span class="content">Related Research</span><a class="self-link" href="#related-research"></a></h2>
+   <h2 class="heading settled" data-level="7" id="related-research"><span class="secno">7. </span><span class="content">Related Research</span><a class="self-link" href="#related-research"></a></h2>
    <p>There has been a long line of research geared toward enabling machine learning on the client.
 I am covering a few known techniques here: quantization, low precision arithemic, sparse matrix,</p>
-   <h3 class="heading settled" data-level="6.1" id="quantization"><span class="secno">6.1. </span><span class="content">Quantization and Low Precision Arithemic</span><a class="self-link" href="#quantization"></a></h3>
+   <h3 class="heading settled" data-level="7.1" id="quantization"><span class="secno">7.1. </span><span class="content">Quantization and Low Precision Arithemic</span><a class="self-link" href="#quantization"></a></h3>
    <p>During the training period, neural network models use floating point numbers to ensure high
 accuracy. After the training period, it may not be necessary to keep high precision for the 
 inference stages. Quantization is a technique to convert high precision floating point numbers to 
 low precision numbers (usually below 32 bits).</p>
    <p>Along with quantization, developers can use low precision arithemic to keep computation to reduce
 power consumption.</p>
-   <h3 class="heading settled" data-level="6.2" id="huffman-coding"><span class="secno">6.2. </span><span class="content">Huffman Coding</span><a class="self-link" href="#huffman-coding"></a></h3>
+   <h3 class="heading settled" data-level="7.2" id="huffman-coding"><span class="secno">7.2. </span><span class="content">Huffman Coding</span><a class="self-link" href="#huffman-coding"></a></h3>
    <p>"A Huffman code is an optimal prefix code commonly used for lossless data compression(Van Leeuwen,
 1976). It uses variable-length codewords to encode source symbols. Experiments
 show that Huffman coding these non-uniformly distributed values saves 20% − 30% of network
 storage."</p>
-   <h3 class="heading settled" data-level="6.3" id="Discretization"><span class="secno">6.3. </span><span class="content">Discretization</span><a class="self-link" href="#Discretization"></a></h3>
+   <h3 class="heading settled" data-level="7.3" id="Discretization"><span class="secno">7.3. </span><span class="content">Discretization</span><a class="self-link" href="#Discretization"></a></h3>
    <p>Discretization is the process to transfer continious functions to to discrete numbers. The process
 can significantly decrease the power needed.</p>
-   <h3 class="heading settled" data-level="6.4" id="sparse-matrix"><span class="secno">6.4. </span><span class="content">Sparse Matrix</span><a class="self-link" href="#sparse-matrix"></a></h3>
+   <h3 class="heading settled" data-level="7.4" id="sparse-matrix"><span class="secno">7.4. </span><span class="content">Sparse Matrix</span><a class="self-link" href="#sparse-matrix"></a></h3>
    <p>Most of machine learning problems don’t involve a densely populated matrix. Adopting sparse matrix
 data structures and specifical numerical methods for those data structures can significantly 
 reduce the size of the memory.</p>
-   <h3 class="heading settled" data-level="6.5" id="other-techniques"><span class="secno">6.5. </span><span class="content">Other techniques</span><a class="self-link" href="#other-techniques"></a></h3>
+   <h3 class="heading settled" data-level="7.5" id="other-techniques"><span class="secno">7.5. </span><span class="content">Other techniques</span><a class="self-link" href="#other-techniques"></a></h3>
    <p>Developers can adopt many techniques to optimize their models such as network pruning or developing
 ternary network.</p>
-   <h2 class="heading settled" data-level="7" id="requirements"><span class="secno">7. </span><span class="content">Requirements</span><a class="self-link" href="#requirements"></a></h2>
+   <h2 class="heading settled" data-level="8" id="requirements"><span class="secno">8. </span><span class="content">Requirements</span><a class="self-link" href="#requirements"></a></h2>
    <p>As illustrated above, there is a new need for a API set designed for machine learning. We should
 be cautious in the design.</p>
    <ol>
