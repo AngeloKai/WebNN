@@ -213,27 +213,106 @@ alongside the post, the application can also recommend appropriately based on th
 A web application built for mixed reality platforms may wish to leverage machine learning to 
 anticipate user intention and movement in order to cleverly render content.
 
-# Existing Standards # {#related-standards}
+# Requirements # {#bottlenecks}
 
-Many existing standards helped introduce neural network technologies into the web platform. Several 
-existing APIs make use of well trained neural networks behind the scene such as the Web Speech API. 
-As mentioned above, the WebGL API are used by developers today to improve the performance of their
-neural network applications. The Web Assembly API can also be used by developers to transpile their
-existing trained networks written in C++ to binaries that can be run on the browser. 
+## Challenges ## {##challenges}
 
-A number of developing standards may also be used by developers in their neural network 
-applications.  
+Performing machine learning inference on the web faces challenges in several areas: file size, 
+memory, performance, and power consumtion. First, machine learning models typically have a large 
+file size. The streamlined mobile version of TensorFlow by itself can take around 10 megabytes. 
+A full model would add at least about 10 megabytes. Second, ML programs, 
+especially deep neural networks, often instantiates many matrices 
+throughout the computation cycle and may exceed 
+max memory limit. Third, as illustrated below, the current web platform has poor support for 
+the typical kind of mathmatical computation that machine learning programs use. Finally,
+today if a model were to be run inside a web application, it can suck up significant power. 
 
-As illustrated below, none of the current standards provide sufficent support machine learning
-on the platform. Each of them solves one subset of problem. However, a generic solution is needed. 
+# Requirements # {#requirements}
+
+Therefore the web platform should offer APIs that aim at the below goals:
+
+1. Provide APIs that are generic and basic enough to cover large range of machine learning 
+    algorithms including deep neural networks, decision-trees, etc.
+1. Optimize toward small file size and memory consumption. 
+1. Make of use of possible hardware acceleration, such as the use of
+    ASICs/GPUs/CPUs/DSPs, and parallelization to maximize performance gain. 
+1. Balance between hardware acceleration and the level of abstraction needed for the web platform. 
+1. Designed with focus on inference instead of training, such as a easy way to port trained models
+    into inference-ready models.
+
+# Related Research # {#related-research}
+
+The design of an appropriate API surface for machine learning inference should incorporate 
+learnings from research about optimizing machine learning models to run on devices with 
+low computational power such as IoT devices. The section covers a few sample 
+techniques for inspiration purpose: quantization, huffman coding, discretization, and sparse 
+matrix. 
+
+A common theme among the techniques is they are all trade-offs between accuracy and other 
+qualities. 
+
+## Quantization ## {#quantization}
+
+Quantization refers to a group of techniques ot convert high precision floating point numbers 
+typically used in the training phase to low precision compact format numbers. Doing so allows 
+us to reduce the file size and accelerate the computation. This technique is particularly 
+useful for DNNs. 
+
+During the training stage, programs typically compute in high precision floating point numbers. 
+That is because the biggest challenge in training is to get the models to work and floating 
+number is best at preserving accuracy. After all tasks like training neural network is 
+essentially keep tweaking the weights of the network until a satifatory result is obtained. 
+Plus developers usually have access to lot of GPUs
+during training and GPUs work very well with floating point numbers. Doing so would allow 
+training to run a lot faster so to not waste development time. 
+
+During the inference, the main challenge becomes the shrinking the file size. As it turns out, 
+converting 32 bit numbers into 8 bit numbers shrinks the file size and memory throughput 
+by four times. The same goes for caches and SIMD instructions. Because 
+many machine learning algorithms are now well-equipped to handle statistical noise, reducing 
+precision often doesn't lead to too much decrease in accuracy. Although low precision may not
+matter that much for GPUs, it can matter a lot for DSPs which are usually designed to operate 
+with 8 bit numbers. Nowadays most computers including smartphones come with DSPs. 
+
+## Huffman Coding ## {#huffman-coding}
+
+Huffman coding is a commonly used compression alogrithm that uses variable-length codeward to 
+encode symbols. Studies suggest Huffman coding can usually shrink network file size by about 
+20% to 30%. The technique can be used after quantization to reduce size. 
+
+## Discretization ## {#Discretization}
+
+Discretization is the process to transfer continious functions to to discrete numbers. Some 
+may argue quantization is part of discretization. One thing to call out about this technique 
+is that this really helps decrease power consumption. 
+
+## Sparse Matrix ## {#sparse-matrix}
+
+Most machine learning problems don't involve a densely populated matrix. Adopting sparse matrix
+data structures and specifical numerical methods for those data structures can significantly 
+reduce the size of the memory. 
+
+
+
+# Existing Standard APIs # {#related-standards}
+
+Today several standard APIs do exist to help developers make use of machine learning tehcnologies
+in their web applications. For example, the Web Speech API lets developers use speech-to-text 
+bidirectional conversion technology. The WebGL API gives developers a path to 
+leverage GPU in matrix computation, though the path is not straight forward as one may hope. 
+The same goes for the WebGPU API proposal put forth by WebKit earlier this year. 
+The Web Assembly API lets developers transpile their
+existing trained networks written in C++ to binaries that can be run on the browser.
+
+However, none of the existing standards was created with supporting machine learning on the web 
+in mind and therefore does not provide sufficent support machine learning
+on the platform. Although each of them helps with one subset of the problems, a generic solution
+is needed. 
 
 ## APIs Built on Pre-Trained Model ## {#pretrained-apis}
 
-implement new APIs; use machine learning behind the scene; due to the advancements 
-added new APIs; which relied on pre-trained machine learning models. 
-
-In the past few years, we have added several new APIs that relied on pre-trained machine learning 
-models. The <a href="https://dvcs.w3.org/hg/speech-api/raw-file/tip/webspeechapi.html">Web
+In the past few years, we have added support for a few new APIs that relies on machine learning 
+technologies. The <a href="https://dvcs.w3.org/hg/speech-api/raw-file/tip/webspeechapi.html">Web
 Speech API</a> enables developers to easily convert text content to speech and speech content to 
 text. Both features are possible because of advancements we made in the natural language 
 processing field, a sub-field of machine learning. The 
@@ -313,68 +392,55 @@ IBM's TrueNorth chips</a>, or <a href="https://www.intelnervana.com/technology/"
 Nervana</a>If the aim of the WebGPU API is to expose interface for the modern GPU, 
 it would not be suitable for the machine learning field. 
 
+# Strawman Proposal # {#strawman}
 
-# Related Research # {#related-research}
+The section includes a strawman proposal of API surface as the beginning point of the 
+conversation. 
 
-There has been a long line of research geared toward enabling machine learning on the client. 
-I am covering a few known techniques here: quantization, low precision arithemic, sparse matrix, 
+<xmp class="idl">
+    [Exposed=Windows, SecureContext]
+    interface Matrix {
+        readonly attribute ArrayBuffer rawMatrix; 
+        readonly attribute unsigned long height;
+        readonly attribute unsigned long width;
+        readonly attribute boolean isTransposed;
+        readonly attribute boolean isVector;
+        readonly attribute int bitSize; // Represent which numerical representation is used
 
-## Quantization and Low Precision Arithemic ## {#quantization}
+        Promise <Matrix> fromJSON (String str);
+        Promise <Matrix> fromArray (ArrayBuffer buf);
 
-During the training period, neural network models use floating point numbers to ensure high 
-accuracy. After the training period, it may not be necessary to keep high precision for the 
-inference stages. Quantization is a technique to convert high precision floating point numbers to 
-low precision numbers (usually below 32 bits). 
+        Promise <Matrix> multiply (Matrix a, Matrix b); // Multiply two matrices 
+        Promise <Matrix> div (Matrix a, Matrix b); // Return matrix of element-wise division
+        Promise <Matrix> mod (Matrix a, Matrix b); // Return element-wise remainder of division
+        Promise <Matrix> sum (Matrix a, Matrix b); // Return matrix of sum of elements of both matrices
+        Promise <Matrix> subtract (Matrix a, Matrix b); // Return element-wise subtraction
+        Promise <Matrix> square (Matrix a); // Return element-wise square 
+        Promise <Matrix> sqrt (Matrix a); // Return element square root 
 
-Along with quantization, developers can use low precision arithemic to keep computation to reduce
-power consumption. 
+        Promise <Matrix> mean (Matrix a); // Return mean of elements across dimensions
+        Promise <Matrix> min (Matrix a); // Return minimum of elements across dimensions
+        Promise <Matrix> max (Matrix a); // Return maximum of elements acorss dimensions
 
-## Huffman Coding ## {#huffman-coding}
+        Promise <Matrix> LogicalAnd (Matrix)
 
-"A Huffman code is an optimal prefix code commonly used for lossless data compression(Van Leeuwen,
-1976). It uses variable-length codewords to encode source symbols. Experiments
-show that Huffman coding these non-uniformly distributed values saves 20% − 30% of network
-storage."
+        Promise <Matrix> gamma ()
 
-## Discretization ## {#Discretization}
+        Promise <Matrix> abs ();
+        Promise <Matrix> real ();
 
-Discretization is the process to transfer continious functions to to discrete numbers. The process
-can significantly decrease the power needed.
+        Promise <float> selectFloat (Matrix a, optional unsigned long x, optional unsigned long y);
+        Promise <unsigned long> selectLong (Matrix a, optional unsigned long x, optional unsigned long y);
 
-## Sparse Matrix ## {#sparse-matrix}
+        Promise <String> toJSON (Matrix a);
+    };
+    
+    interface SparseMat : Matrix {
+        // to do 
+    };
+    interface DenseMat : Matrix {}; 
+    interface SparseVec : Matrix {};
+    interface DenseVec : Matrix {};
+</xmp>
 
-Most of machine learning problems don't involve a densely populated matrix. Adopting sparse matrix
-data structures and specifical numerical methods for those data structures can significantly 
-reduce the size of the memory. 
-
-
-## Other techniques ## {#other-techniques}
-
-Developers can adopt many techniques to optimize their models such as network pruning or developing
-ternary network. 
-
-# Requirements # {#requirements}
-
-As illustrated above, there is a new need for a API set designed for machine learning. We should 
-be cautious in the design.
-
-1. Optimize toward reduced memory size. 
-1. High performance speed. 
-1. Balance between hardware acceleration and the level of abstraction needed for the web platform. 
-1. Open for wide variety of hardware support including ASICs, GPUs, and CPUs. 
-1. Help developers easily port apps. 
-1. Focus on inference instead of training.
-1. Focus on enabling an initial set of experiences instead of aiming to cover all in the beginning.
-    Unlike some other APIs, I'd expect machine learning to eventually be a fundamental part of the
-    web platform. However, the evolution of the API will take a long time. 
-    Although machine learning has been part of the web development for ages (take search engine for 
-    example!), I'd like to think we are still on the early age of this development. There are many
-    active researches going on. There's a boom in terms of interests in this area so we may take a
-    long time to figure it out. As we progress the API, we should have active conversations with 
-    the development community, identify initial set of use cases, and develop APIs for those use
-    cases. Once the use cases are satisfied, we can then move on to the next set. 
-
-
-As part of looking into the balance, we can different sets of API. We also need to make sure we don'
-cater to one algorithm but look for broader applications. 
 

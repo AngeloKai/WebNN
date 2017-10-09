@@ -1178,7 +1178,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5834a15f311a639c0b59ff2edbf3a060391d15ff" name="generator">
   <link href="https://angelokai.github.io/WebNN/explainer/explainer.html" rel="canonical">
-  <meta content="5747b381f6b53bee5c7bd63406a3a106faf6de0b" name="document-revision">
+  <meta content="2843a01fc77b5b3c44492db21e196542672f9910" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1188,35 +1188,6 @@ Possible extra rowspan handling
 }
 [data-md] > :last-child {
     margin-bottom: 0;
-}</style>
-<style>/* style-counters */
-
-body {
-    counter-reset: example figure issue;
-}
-.issue {
-    counter-increment: issue;
-}
-.issue:not(.no-marker)::before {
-    content: "Issue " counter(issue);
-}
-
-.example {
-    counter-increment: example;
-}
-.example:not(.no-marker)::before {
-    content: "Example " counter(example);
-}
-.invalid.example:not(.no-marker)::before,
-.illegal.example:not(.no-marker)::before {
-    content: "Invalid Example" counter(example);
-}
-
-figcaption {
-    counter-increment: figure;
-}
-figcaption:not(.no-marker)::before {
-    content: "Figure " counter(figure) " ";
 }</style>
 <style>/* style-selflinks */
 
@@ -1264,6 +1235,35 @@ dfn > a.self-link:hover {
 a.self-link::before            { content: "¶"; }
 .heading > a.self-link::before { content: "§"; }
 dfn > a.self-link::before      { content: "#"; }</style>
+<style>/* style-counters */
+
+body {
+    counter-reset: example figure issue;
+}
+.issue {
+    counter-increment: issue;
+}
+.issue:not(.no-marker)::before {
+    content: "Issue " counter(issue);
+}
+
+.example {
+    counter-increment: example;
+}
+.example:not(.no-marker)::before {
+    content: "Example " counter(example);
+}
+.invalid.example:not(.no-marker)::before,
+.illegal.example:not(.no-marker)::before {
+    content: "Invalid Example" counter(example);
+}
+
+figcaption {
+    counter-increment: figure;
+}
+figcaption:not(.no-marker)::before {
+    content: "Figure " counter(figure) " ";
+}</style>
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1326,11 +1326,106 @@ pre .property::before, pre .property::after {
 [data-link-type=biblio] {
     white-space: pre;
 }</style>
+<style>/* style-dfn-panel */
+
+        .dfn-panel {
+            position: absolute;
+            z-index: 35;
+            height: auto;
+            width: -webkit-fit-content;
+            width: fit-content;
+            max-width: 300px;
+            max-height: 500px;
+            overflow: auto;
+            padding: 0.5em 0.75em;
+            font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+            background: #DDDDDD;
+            color: black;
+            border: outset 0.2em;
+        }
+        .dfn-panel:not(.on) { display: none; }
+        .dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+        .dfn-panel > b { display: block; }
+        .dfn-panel a { color: black; }
+        .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+        .dfn-panel > b + b { margin-top: 0.25em; }
+        .dfn-panel ul { padding: 0; }
+        .dfn-panel li { list-style: inside; }
+        .dfn-panel.activated {
+            display: inline-block;
+            position: fixed;
+            left: .5em;
+            bottom: 2em;
+            margin: 0 auto;
+            max-width: calc(100vw - 1.5em - .4em - .5em);
+            max-height: 30vh;
+        }
+
+        .dfn-paneled { cursor: pointer; }
+        </style>
+<style>/* style-syntax-highlighting */
+pre.idl.highlight { color: #708090; }
+.highlight:not(.idl) { background: hsl(24, 20%, 95%); }
+code.highlight { padding: .1em; border-radius: .3em; }
+pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
+.highlight .c { color: #708090 } /* Comment */
+.highlight .k { color: #990055 } /* Keyword */
+.highlight .l { color: #000000 } /* Literal */
+.highlight .n { color: #0077aa } /* Name */
+.highlight .o { color: #999999 } /* Operator */
+.highlight .p { color: #999999 } /* Punctuation */
+.highlight .cm { color: #708090 } /* Comment.Multiline */
+.highlight .cp { color: #708090 } /* Comment.Preproc */
+.highlight .c1 { color: #708090 } /* Comment.Single */
+.highlight .cs { color: #708090 } /* Comment.Special */
+.highlight .kc { color: #990055 } /* Keyword.Constant */
+.highlight .kd { color: #990055 } /* Keyword.Declaration */
+.highlight .kn { color: #990055 } /* Keyword.Namespace */
+.highlight .kp { color: #990055 } /* Keyword.Pseudo */
+.highlight .kr { color: #990055 } /* Keyword.Reserved */
+.highlight .kt { color: #990055 } /* Keyword.Type */
+.highlight .ld { color: #000000 } /* Literal.Date */
+.highlight .m { color: #000000 } /* Literal.Number */
+.highlight .s { color: #a67f59 } /* Literal.String */
+.highlight .na { color: #0077aa } /* Name.Attribute */
+.highlight .nc { color: #0077aa } /* Name.Class */
+.highlight .no { color: #0077aa } /* Name.Constant */
+.highlight .nd { color: #0077aa } /* Name.Decorator */
+.highlight .ni { color: #0077aa } /* Name.Entity */
+.highlight .ne { color: #0077aa } /* Name.Exception */
+.highlight .nf { color: #0077aa } /* Name.Function */
+.highlight .nl { color: #0077aa } /* Name.Label */
+.highlight .nn { color: #0077aa } /* Name.Namespace */
+.highlight .py { color: #0077aa } /* Name.Property */
+.highlight .nt { color: #669900 } /* Name.Tag */
+.highlight .nv { color: #222222 } /* Name.Variable */
+.highlight .ow { color: #999999 } /* Operator.Word */
+.highlight .mb { color: #000000 } /* Literal.Number.Bin */
+.highlight .mf { color: #000000 } /* Literal.Number.Float */
+.highlight .mh { color: #000000 } /* Literal.Number.Hex */
+.highlight .mi { color: #000000 } /* Literal.Number.Integer */
+.highlight .mo { color: #000000 } /* Literal.Number.Oct */
+.highlight .sb { color: #a67f59 } /* Literal.String.Backtick */
+.highlight .sc { color: #a67f59 } /* Literal.String.Char */
+.highlight .sd { color: #a67f59 } /* Literal.String.Doc */
+.highlight .s2 { color: #a67f59 } /* Literal.String.Double */
+.highlight .se { color: #a67f59 } /* Literal.String.Escape */
+.highlight .sh { color: #a67f59 } /* Literal.String.Heredoc */
+.highlight .si { color: #a67f59 } /* Literal.String.Interpol */
+.highlight .sx { color: #a67f59 } /* Literal.String.Other */
+.highlight .sr { color: #a67f59 } /* Literal.String.Regex */
+.highlight .s1 { color: #a67f59 } /* Literal.String.Single */
+.highlight .ss { color: #a67f59 } /* Literal.String.Symbol */
+.highlight .vc { color: #0077aa } /* Name.Variable.Class */
+.highlight .vg { color: #0077aa } /* Name.Variable.Global */
+.highlight .vi { color: #0077aa } /* Name.Variable.Instance */
+.highlight .il { color: #000000 } /* Literal.Number.Integer.Long */
+</style>
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Base Machine Learning API: Use Cases and Requirements</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2017-10-08">8 October 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2017-10-09">9 October 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1344,7 +1439,7 @@ pre .property::before, pre .property::after {
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 8 October 2017,
+In addition, as of 9 October 2017,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1384,34 +1479,41 @@ for a wide variety of machine learning operations.</p>
       <li><a href="#mixed-reality"><span class="secno">5.6</span> <span class="content">Mixed Reality Experience</span></a>
      </ol>
     <li>
-     <a href="#related-standards"><span class="secno">6</span> <span class="content">Existing Standards</span></a>
+     <a href="#bottlenecks"><span class="secno">6</span> <span class="content">Requirements</span></a>
      <ol class="toc">
-      <li><a href="#pretrained-apis"><span class="secno">6.1</span> <span class="content">APIs Built on Pre-Trained Model</span></a>
-      <li><a href="#webgl"><span class="secno">6.2</span> <span class="content">WebGL</span></a>
-      <li><a href="#web-assembly"><span class="secno">6.3</span> <span class="content">Web Assembly</span></a>
-      <li><a href="#web-gpu"><span class="secno">6.4</span> <span class="content">WebGPU</span></a>
+      <li><a href="##challenges"><span class="secno">6.1</span> <span class="content">Challenges</span></a>
+     </ol>
+    <li><a href="#requirements"><span class="secno">7</span> <span class="content">Requirements</span></a>
+    <li>
+     <a href="#related-research"><span class="secno">8</span> <span class="content">Related Research</span></a>
+     <ol class="toc">
+      <li><a href="#quantization"><span class="secno">8.1</span> <span class="content">Quantization</span></a>
+      <li><a href="#huffman-coding"><span class="secno">8.2</span> <span class="content">Huffman Coding</span></a>
+      <li><a href="#Discretization"><span class="secno">8.3</span> <span class="content">Discretization</span></a>
+      <li><a href="#sparse-matrix"><span class="secno">8.4</span> <span class="content">Sparse Matrix</span></a>
      </ol>
     <li>
-     <a href="#related-research"><span class="secno">7</span> <span class="content">Related Research</span></a>
+     <a href="#related-standards"><span class="secno">9</span> <span class="content">Existing Standard APIs</span></a>
      <ol class="toc">
-      <li><a href="#quantization"><span class="secno">7.1</span> <span class="content">Quantization and Low Precision Arithemic</span></a>
-      <li><a href="#huffman-coding"><span class="secno">7.2</span> <span class="content">Huffman Coding</span></a>
-      <li><a href="#Discretization"><span class="secno">7.3</span> <span class="content">Discretization</span></a>
-      <li><a href="#sparse-matrix"><span class="secno">7.4</span> <span class="content">Sparse Matrix</span></a>
-      <li><a href="#other-techniques"><span class="secno">7.5</span> <span class="content">Other techniques</span></a>
+      <li><a href="#pretrained-apis"><span class="secno">9.1</span> <span class="content">APIs Built on Pre-Trained Model</span></a>
+      <li><a href="#webgl"><span class="secno">9.2</span> <span class="content">WebGL</span></a>
+      <li><a href="#web-assembly"><span class="secno">9.3</span> <span class="content">Web Assembly</span></a>
+      <li><a href="#web-gpu"><span class="secno">9.4</span> <span class="content">WebGPU</span></a>
      </ol>
-    <li><a href="#requirements"><span class="secno">8</span> <span class="content">Requirements</span></a>
+    <li><a href="#strawman"><span class="secno">10</span> <span class="content">Strawman Proposal</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ol class="toc">
       <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
+      <li><a href="#index-defined-elsewhere"><span class="secno"></span> <span class="content">Terms defined by reference</span></a>
      </ol>
     <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
       <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
      </ol>
+    <li><a href="#idl-index"><span class="secno"></span> <span class="content">IDL Index</span></a>
    </ol>
   </nav>
   <main>
@@ -1568,21 +1670,88 @@ alongside the post, the application can also recommend appropriately based on th
    <h3 class="heading settled" data-level="5.6" id="mixed-reality"><span class="secno">5.6. </span><span class="content">Mixed Reality Experience</span><a class="self-link" href="#mixed-reality"></a></h3>
    <p>A web application built for mixed reality platforms may wish to leverage machine learning to
 anticipate user intention and movement in order to cleverly render content.</p>
-   <h2 class="heading settled" data-level="6" id="related-standards"><span class="secno">6. </span><span class="content">Existing Standards</span><a class="self-link" href="#related-standards"></a></h2>
-   <p>Many existing standards helped introduce neural network technologies into the web platform. Several
-existing APIs make use of well trained neural networks behind the scene such as the Web Speech API. 
-As mentioned above, the WebGL API are used by developers today to improve the performance of their
-neural network applications. The Web Assembly API can also be used by developers to transpile their
+   <h2 class="heading settled" data-level="6" id="bottlenecks"><span class="secno">6. </span><span class="content">Requirements</span><a class="self-link" href="#bottlenecks"></a></h2>
+   <h3 class="heading settled" data-level="6.1" id="#challenges"><span class="secno">6.1. </span><span class="content">Challenges</span><a class="self-link" href="#%23challenges"></a></h3>
+   <p>Performing machine learning inference on the web faces challenges in several areas: file size,
+memory, performance, and power consumtion. First, machine learning models typically have a large 
+file size. The streamlined mobile version of TensorFlow by itself can take around 10 megabytes. 
+A full model would add at least about 10 megabytes. Second, ML programs, 
+especially deep neural networks, often instantiates many matrices 
+throughout the computation cycle and may exceed 
+max memory limit. Third, as illustrated below, the current web platform has poor support for 
+the typical kind of mathmatical computation that machine learning programs use. Finally,
+today if a model were to be run inside a web application, it can suck up significant power.</p>
+   <h2 class="heading settled" data-level="7" id="requirements"><span class="secno">7. </span><span class="content">Requirements</span><a class="self-link" href="#requirements"></a></h2>
+   <p>Therefore the web platform should offer APIs that aim at the below goals:</p>
+   <ol>
+    <li data-md="">
+     <p>Provide APIs that are generic and basic enough to cover large range of machine learning
+algorithms including deep neural networks, decision-trees, etc.</p>
+    <li data-md="">
+     <p>Optimize toward small file size and memory consumption.</p>
+    <li data-md="">
+     <p>Make of use of possible hardware acceleration, such as the use of
+ASICs/GPUs/CPUs/DSPs, and parallelization to maximize performance gain.</p>
+    <li data-md="">
+     <p>Balance between hardware acceleration and the level of abstraction needed for the web platform.</p>
+    <li data-md="">
+     <p>Designed with focus on inference instead of training, such as a easy way to port trained models
+into inference-ready models.</p>
+   </ol>
+   <h2 class="heading settled" data-level="8" id="related-research"><span class="secno">8. </span><span class="content">Related Research</span><a class="self-link" href="#related-research"></a></h2>
+   <p>The design of an appropriate API surface for machine learning inference should incorporate
+learnings from research about optimizing machine learning models to run on devices with 
+low computational power such as IoT devices. The section covers a few sample 
+techniques for inspiration purpose: quantization, huffman coding, discretization, and sparse 
+matrix.</p>
+   <p>A common theme among the techniques is they are all trade-offs between accuracy and other
+qualities.</p>
+   <h3 class="heading settled" data-level="8.1" id="quantization"><span class="secno">8.1. </span><span class="content">Quantization</span><a class="self-link" href="#quantization"></a></h3>
+   <p>Quantization refers to a group of techniques ot convert high precision floating point numbers
+typically used in the training phase to low precision compact format numbers. Doing so allows 
+us to reduce the file size and accelerate the computation. This technique is particularly 
+useful for DNNs.</p>
+   <p>During the training stage, programs typically compute in high precision floating point numbers.
+That is because the biggest challenge in training is to get the models to work and floating 
+number is best at preserving accuracy. After all tasks like training neural network is 
+essentially keep tweaking the weights of the network until a satifatory result is obtained. 
+Plus developers usually have access to lot of GPUs
+during training and GPUs work very well with floating point numbers. Doing so would allow 
+training to run a lot faster so to not waste development time.</p>
+   <p>During the inference, the main challenge becomes the shrinking the file size. As it turns out,
+converting 32 bit numbers into 8 bit numbers shrinks the file size and memory throughput 
+by four times. The same goes for caches and SIMD instructions. Because 
+many machine learning algorithms are now well-equipped to handle statistical noise, reducing 
+precision often doesn’t lead to too much decrease in accuracy. Although low precision may not
+matter that much for GPUs, it can matter a lot for DSPs which are usually designed to operate 
+with 8 bit numbers. Nowadays most computers including smartphones come with DSPs.</p>
+   <h3 class="heading settled" data-level="8.2" id="huffman-coding"><span class="secno">8.2. </span><span class="content">Huffman Coding</span><a class="self-link" href="#huffman-coding"></a></h3>
+   <p>Huffman coding is a commonly used compression alogrithm that uses variable-length codeward to
+encode symbols. Studies suggest Huffman coding can usually shrink network file size by about 
+20% to 30%. The technique can be used after quantization to reduce size.</p>
+   <h3 class="heading settled" data-level="8.3" id="Discretization"><span class="secno">8.3. </span><span class="content">Discretization</span><a class="self-link" href="#Discretization"></a></h3>
+   <p>Discretization is the process to transfer continious functions to to discrete numbers. Some
+may argue quantization is part of discretization. One thing to call out about this technique 
+is that this really helps decrease power consumption.</p>
+   <h3 class="heading settled" data-level="8.4" id="sparse-matrix"><span class="secno">8.4. </span><span class="content">Sparse Matrix</span><a class="self-link" href="#sparse-matrix"></a></h3>
+   <p>Most machine learning problems don’t involve a densely populated matrix. Adopting sparse matrix
+data structures and specifical numerical methods for those data structures can significantly 
+reduce the size of the memory.</p>
+   <h2 class="heading settled" data-level="9" id="related-standards"><span class="secno">9. </span><span class="content">Existing Standard APIs</span><a class="self-link" href="#related-standards"></a></h2>
+   <p>Today several standard APIs do exist to help developers make use of machine learning tehcnologies
+in their web applications. For example, the Web Speech API lets developers use speech-to-text 
+bidirectional conversion technology. The WebGL API gives developers a path to 
+leverage GPU in matrix computation, though the path is not straight forward as one may hope. 
+The same goes for the WebGPU API proposal put forth by WebKit earlier this year. 
+The Web Assembly API lets developers transpile their
 existing trained networks written in C++ to binaries that can be run on the browser.</p>
-   <p>A number of developing standards may also be used by developers in their neural network
-applications.</p>
-   <p>As illustrated below, none of the current standards provide sufficent support machine learning
-on the platform. Each of them solves one subset of problem. However, a generic solution is needed.</p>
-   <h3 class="heading settled" data-level="6.1" id="pretrained-apis"><span class="secno">6.1. </span><span class="content">APIs Built on Pre-Trained Model</span><a class="self-link" href="#pretrained-apis"></a></h3>
-   <p>implement new APIs; use machine learning behind the scene; due to the advancements
-added new APIs; which relied on pre-trained machine learning models.</p>
-   <p>In the past few years, we have added several new APIs that relied on pre-trained machine learning
-models. The <a href="https://dvcs.w3.org/hg/speech-api/raw-file/tip/webspeechapi.html">Web
+   <p>However, none of the existing standards was created with supporting machine learning on the web
+in mind and therefore does not provide sufficent support machine learning
+on the platform. Although each of them helps with one subset of the problems, a generic solution
+is needed.</p>
+   <h3 class="heading settled" data-level="9.1" id="pretrained-apis"><span class="secno">9.1. </span><span class="content">APIs Built on Pre-Trained Model</span><a class="self-link" href="#pretrained-apis"></a></h3>
+   <p>In the past few years, we have added support for a few new APIs that relies on machine learning
+technologies. The <a href="https://dvcs.w3.org/hg/speech-api/raw-file/tip/webspeechapi.html">Web
 Speech API</a> enables developers to easily convert text content to speech and speech content to 
 text. Both features are possible because of advancements we made in the natural language 
 processing field, a sub-field of machine learning. The <a href="https://w3c.github.io/webauthn/">Web Authentication API</a> enables web developers to 
@@ -1596,7 +1765,7 @@ often based on research in machine learning, which in turn furthered research in
 computationaly expensive. Yet it is unscalable to continue adding APIs to the platform for the 
 reason of computational cost. There should be a generic solution that can bring down the 
 computational cost of doing machine learning on the web platform.</p>
-   <h3 class="heading settled" data-level="6.2" id="webgl"><span class="secno">6.2. </span><span class="content">WebGL</span><a class="self-link" href="#webgl"></a></h3>
+   <h3 class="heading settled" data-level="9.2" id="webgl"><span class="secno">9.2. </span><span class="content">WebGL</span><a class="self-link" href="#webgl"></a></h3>
    <p>The WebGL API was designed to render 3D and 2D graphic content and make use of GPUs behind the
 scene when necessary. Given that most of graphic processing relies on matrix computation, 
 web developers have developed libraries that wrap around WebGL to accelerate matrix computation. 
@@ -1613,7 +1782,7 @@ two arrays and three textures).</p>
 one can argue that this goal is not within the charter of an API that is designed for drawing 
 graphics. In addition, the next WebGL (WebGL 3.00 are still far away given that Chrome and Firefox
 has just implemented the support for the 2.0 version earlier this year.</p>
-   <h3 class="heading settled" data-level="6.3" id="web-assembly"><span class="secno">6.3. </span><span class="content">Web Assembly</span><a class="self-link" href="#web-assembly"></a></h3>
+   <h3 class="heading settled" data-level="9.3" id="web-assembly"><span class="secno">9.3. </span><span class="content">Web Assembly</span><a class="self-link" href="#web-assembly"></a></h3>
    <p>WebAssembly is a new low-level assembly-like language with a compact binary format and near-native
 performance. Programs written in C/C++ can be compiled directly to this format to run on the web. 
 On the browsers, WebAssembly programs run in a sandbox that can be used alongside JavaScript.</p>
@@ -1631,7 +1800,7 @@ doing ML computation on the client. Common matrix functions can be large in size
 Because WebAssembly is running on a blank slate, the developers have to load related libraries 
 by themselves. If the libraries are built into the platform, much less speed requirement is needed. 
 For example, developers would have to define their own matrix/format data type.</p>
-   <h3 class="heading settled" data-level="6.4" id="web-gpu"><span class="secno">6.4. </span><span class="content">WebGPU</span><a class="self-link" href="#web-gpu"></a></h3>
+   <h3 class="heading settled" data-level="9.4" id="web-gpu"><span class="secno">9.4. </span><span class="content">WebGPU</span><a class="self-link" href="#web-gpu"></a></h3>
    <p>WebGPU API is a new incubating API that aims at exposing modern GPU features. Its initial API set
 is a derivation from the Metal language. Prototype for the API has landed in WebKit.</p>
    <p>Although the API aims at exposing low-level GPU functionalities, its <a href="https://webkit.org/wp-content/uploads/webgpu-api-proposal.html">initial API set is 
@@ -1643,60 +1812,53 @@ efficient technique to reduce the size of programs. Companies have produced chip
 for machine learning for personal devices instead of using GPUs, such as <a href="https://www.movidius.com/technology">Movidius' (an Intel company) Myriad VPU</a>, the <a href="https://www.ibm.com/blogs/research/2016/09/deep-learning-possible-embedded-systems-thanks-truenorth/"> IBM’s TrueNorth chips</a>, or <a href="https://www.intelnervana.com/technology/">Intel’s 
 Nervana</a>If the aim of the WebGPU API is to expose interface for the modern GPU, 
 it would not be suitable for the machine learning field.</p>
-   <h2 class="heading settled" data-level="7" id="related-research"><span class="secno">7. </span><span class="content">Related Research</span><a class="self-link" href="#related-research"></a></h2>
-   <p>There has been a long line of research geared toward enabling machine learning on the client.
-I am covering a few known techniques here: quantization, low precision arithemic, sparse matrix,</p>
-   <h3 class="heading settled" data-level="7.1" id="quantization"><span class="secno">7.1. </span><span class="content">Quantization and Low Precision Arithemic</span><a class="self-link" href="#quantization"></a></h3>
-   <p>During the training period, neural network models use floating point numbers to ensure high
-accuracy. After the training period, it may not be necessary to keep high precision for the 
-inference stages. Quantization is a technique to convert high precision floating point numbers to 
-low precision numbers (usually below 32 bits).</p>
-   <p>Along with quantization, developers can use low precision arithemic to keep computation to reduce
-power consumption.</p>
-   <h3 class="heading settled" data-level="7.2" id="huffman-coding"><span class="secno">7.2. </span><span class="content">Huffman Coding</span><a class="self-link" href="#huffman-coding"></a></h3>
-   <p>"A Huffman code is an optimal prefix code commonly used for lossless data compression(Van Leeuwen,
-1976). It uses variable-length codewords to encode source symbols. Experiments
-show that Huffman coding these non-uniformly distributed values saves 20% − 30% of network
-storage."</p>
-   <h3 class="heading settled" data-level="7.3" id="Discretization"><span class="secno">7.3. </span><span class="content">Discretization</span><a class="self-link" href="#Discretization"></a></h3>
-   <p>Discretization is the process to transfer continious functions to to discrete numbers. The process
-can significantly decrease the power needed.</p>
-   <h3 class="heading settled" data-level="7.4" id="sparse-matrix"><span class="secno">7.4. </span><span class="content">Sparse Matrix</span><a class="self-link" href="#sparse-matrix"></a></h3>
-   <p>Most of machine learning problems don’t involve a densely populated matrix. Adopting sparse matrix
-data structures and specifical numerical methods for those data structures can significantly 
-reduce the size of the memory.</p>
-   <h3 class="heading settled" data-level="7.5" id="other-techniques"><span class="secno">7.5. </span><span class="content">Other techniques</span><a class="self-link" href="#other-techniques"></a></h3>
-   <p>Developers can adopt many techniques to optimize their models such as network pruning or developing
-ternary network.</p>
-   <h2 class="heading settled" data-level="8" id="requirements"><span class="secno">8. </span><span class="content">Requirements</span><a class="self-link" href="#requirements"></a></h2>
-   <p>As illustrated above, there is a new need for a API set designed for machine learning. We should
-be cautious in the design.</p>
-   <ol>
-    <li data-md="">
-     <p>Optimize toward reduced memory size.</p>
-    <li data-md="">
-     <p>High performance speed.</p>
-    <li data-md="">
-     <p>Balance between hardware acceleration and the level of abstraction needed for the web platform.</p>
-    <li data-md="">
-     <p>Open for wide variety of hardware support including ASICs, GPUs, and CPUs.</p>
-    <li data-md="">
-     <p>Help developers easily port apps.</p>
-    <li data-md="">
-     <p>Focus on inference instead of training.</p>
-    <li data-md="">
-     <p>Focus on enabling an initial set of experiences instead of aiming to cover all in the beginning.
-Unlike some other APIs, I’d expect machine learning to eventually be a fundamental part of the
-web platform. However, the evolution of the API will take a long time. 
-Although machine learning has been part of the web development for ages (take search engine for 
-example!), I’d like to think we are still on the early age of this development. There are many
-active researches going on. There’s a boom in terms of interests in this area so we may take a
-long time to figure it out. As we progress the API, we should have active conversations with 
-the development community, identify initial set of use cases, and develop APIs for those use
-cases. Once the use cases are satisfied, we can then move on to the next set.</p>
-   </ol>
-   <p>As part of looking into the balance, we can different sets of API. We also need to make sure we don'
-cater to one algorithm but look for broader applications.</p>
+   <h2 class="heading settled" data-level="10" id="strawman"><span class="secno">10. </span><span class="content">Strawman Proposal</span><a class="self-link" href="#strawman"></a></h2>
+   <p>The section includes a strawman proposal of API surface as the beginning point of the
+conversation.</p>
+<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed">Exposed</a>=<span class="n">Windows</span>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext">SecureContext</a>]
+<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="matrix"><code>Matrix</code></dfn> {
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer"><span class="kt">ArrayBuffer</span></a> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="attribute" data-export="" data-readonly="" data-type="ArrayBuffer" id="dom-matrix-rawmatrix"><code>rawMatrix</code><a class="self-link" href="#dom-matrix-rawmatrix"></a></dfn>; 
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long"><span class="kt">unsigned</span> <span class="kt">long</span></a> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="attribute" data-export="" data-readonly="" data-type="unsigned long" id="dom-matrix-height"><code>height</code><a class="self-link" href="#dom-matrix-height"></a></dfn>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long①"><span class="kt">unsigned</span> <span class="kt">long</span></a> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="attribute" data-export="" data-readonly="" data-type="unsigned long" id="dom-matrix-width"><code>width</code><a class="self-link" href="#dom-matrix-width"></a></dfn>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean"><span class="kt">boolean</span></a> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="attribute" data-export="" data-readonly="" data-type="boolean" id="dom-matrix-istransposed"><code>isTransposed</code><a class="self-link" href="#dom-matrix-istransposed"></a></dfn>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean①"><span class="kt">boolean</span></a> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="attribute" data-export="" data-readonly="" data-type="boolean" id="dom-matrix-isvector"><code>isVector</code><a class="self-link" href="#dom-matrix-isvector"></a></dfn>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name">int</a> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="attribute" data-export="" data-readonly="" data-type="int" id="dom-matrix-bitsize"><code>bitSize</code><a class="self-link" href="#dom-matrix-bitsize"></a></dfn>; // Represent which numerical representation is used
+
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix">Matrix</a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="fromJSON(str)" id="dom-matrix-fromjson"><code>fromJSON</code><a class="self-link" href="#dom-matrix-fromjson"></a></dfn> (<a class="n" data-link-type="idl-name">String</a> <dfn class="nv idl-code" data-dfn-for="Matrix/fromJSON(str)" data-dfn-type="argument" data-export="" id="dom-matrix-fromjson-str-str"><code>str</code><a class="self-link" href="#dom-matrix-fromjson-str-str"></a></dfn>);
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①">Matrix</a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="fromArray(buf)" id="dom-matrix-fromarray"><code>fromArray</code><a class="self-link" href="#dom-matrix-fromarray"></a></dfn> (<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer①"><span class="kt">ArrayBuffer</span></a> <dfn class="nv idl-code" data-dfn-for="Matrix/fromArray(buf)" data-dfn-type="argument" data-export="" id="dom-matrix-fromarray-buf-buf"><code>buf</code><a class="self-link" href="#dom-matrix-fromarray-buf-buf"></a></dfn>);
+
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②">Matrix</a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="multiply(a, b)" id="dom-matrix-multiply"><code>multiply</code><a class="self-link" href="#dom-matrix-multiply"></a></dfn> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix③">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/multiply(a, b)" data-dfn-type="argument" data-export="" id="dom-matrix-multiply-a-b-a"><code>a</code><a class="self-link" href="#dom-matrix-multiply-a-b-a"></a></dfn>, <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix④">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/multiply(a, b)" data-dfn-type="argument" data-export="" id="dom-matrix-multiply-a-b-b"><code>b</code><a class="self-link" href="#dom-matrix-multiply-a-b-b"></a></dfn>); // Multiply two matrices 
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix⑤">Matrix</a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="div(a, b)" id="dom-matrix-div"><code>div</code><a class="self-link" href="#dom-matrix-div"></a></dfn> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix⑥">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/div(a, b)" data-dfn-type="argument" data-export="" id="dom-matrix-div-a-b-a"><code>a</code><a class="self-link" href="#dom-matrix-div-a-b-a"></a></dfn>, <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix⑦">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/div(a, b)" data-dfn-type="argument" data-export="" id="dom-matrix-div-a-b-b"><code>b</code><a class="self-link" href="#dom-matrix-div-a-b-b"></a></dfn>); // Return matrix of element-wise division
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix⑧">Matrix</a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="mod(a, b)" id="dom-matrix-mod"><code>mod</code><a class="self-link" href="#dom-matrix-mod"></a></dfn> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix⑨">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/mod(a, b)" data-dfn-type="argument" data-export="" id="dom-matrix-mod-a-b-a"><code>a</code><a class="self-link" href="#dom-matrix-mod-a-b-a"></a></dfn>, <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①⓪">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/mod(a, b)" data-dfn-type="argument" data-export="" id="dom-matrix-mod-a-b-b"><code>b</code><a class="self-link" href="#dom-matrix-mod-a-b-b"></a></dfn>); // Return element-wise remainder of division
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①①">Matrix</a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="sum(a, b)" id="dom-matrix-sum"><code>sum</code><a class="self-link" href="#dom-matrix-sum"></a></dfn> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①②">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/sum(a, b)" data-dfn-type="argument" data-export="" id="dom-matrix-sum-a-b-a"><code>a</code><a class="self-link" href="#dom-matrix-sum-a-b-a"></a></dfn>, <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①③">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/sum(a, b)" data-dfn-type="argument" data-export="" id="dom-matrix-sum-a-b-b"><code>b</code><a class="self-link" href="#dom-matrix-sum-a-b-b"></a></dfn>); // Return matrix of sum of elements of both matrices
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①④">Matrix</a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="subtract(a, b)" id="dom-matrix-subtract"><code>subtract</code><a class="self-link" href="#dom-matrix-subtract"></a></dfn> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①⑤">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/subtract(a, b)" data-dfn-type="argument" data-export="" id="dom-matrix-subtract-a-b-a"><code>a</code><a class="self-link" href="#dom-matrix-subtract-a-b-a"></a></dfn>, <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①⑥">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/subtract(a, b)" data-dfn-type="argument" data-export="" id="dom-matrix-subtract-a-b-b"><code>b</code><a class="self-link" href="#dom-matrix-subtract-a-b-b"></a></dfn>); // Return element-wise subtraction
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①⑦">Matrix</a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="square(a)" id="dom-matrix-square"><code>square</code><a class="self-link" href="#dom-matrix-square"></a></dfn> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①⑧">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/square(a)" data-dfn-type="argument" data-export="" id="dom-matrix-square-a-a"><code>a</code><a class="self-link" href="#dom-matrix-square-a-a"></a></dfn>); // Return element-wise square 
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①⑨">Matrix</a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="sqrt(a)" id="dom-matrix-sqrt"><code>sqrt</code><a class="self-link" href="#dom-matrix-sqrt"></a></dfn> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②⓪">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/sqrt(a)" data-dfn-type="argument" data-export="" id="dom-matrix-sqrt-a-a"><code>a</code><a class="self-link" href="#dom-matrix-sqrt-a-a"></a></dfn>); // Return element square root 
+
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②①">Matrix</a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="mean(a)" id="dom-matrix-mean"><code>mean</code><a class="self-link" href="#dom-matrix-mean"></a></dfn> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②②">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/mean(a)" data-dfn-type="argument" data-export="" id="dom-matrix-mean-a-a"><code>a</code><a class="self-link" href="#dom-matrix-mean-a-a"></a></dfn>); // Return mean of elements across dimensions
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②③">Matrix</a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="min(a)" id="dom-matrix-min"><code>min</code><a class="self-link" href="#dom-matrix-min"></a></dfn> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②④">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/min(a)" data-dfn-type="argument" data-export="" id="dom-matrix-min-a-a"><code>a</code><a class="self-link" href="#dom-matrix-min-a-a"></a></dfn>); // Return minimum of elements across dimensions
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②⑤">Matrix</a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="max(a)" id="dom-matrix-max"><code>max</code><a class="self-link" href="#dom-matrix-max"></a></dfn> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②⑥">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/max(a)" data-dfn-type="argument" data-export="" id="dom-matrix-max-a-a"><code>a</code><a class="self-link" href="#dom-matrix-max-a-a"></a></dfn>); // Return maximum of elements acorss dimensions
+
+    Promise &lt;Matrix> LogicalAnd (Matrix)
+
+    Promise &lt;Matrix> gamma ()
+
+    Promise &lt;Matrix> abs ();
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②⑦">Matrix</a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="real()" id="dom-matrix-real"><code>real</code><a class="self-link" href="#dom-matrix-real"></a></dfn> ();
+
+    <span class="kt">Promise</span> &lt;<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-float" id="ref-for-idl-float"><span class="kt">float</span></a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="selectFloat(a, x, y)|selectFloat(a, x)|selectFloat(a)" id="dom-matrix-selectfloat"><code>selectFloat</code><a class="self-link" href="#dom-matrix-selectfloat"></a></dfn> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②⑧">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/selectFloat(a, x, y), Matrix/selectFloat(a, x), Matrix/selectFloat(a)" data-dfn-type="argument" data-export="" id="dom-matrix-selectfloat-a-x-y-a"><code>a</code><a class="self-link" href="#dom-matrix-selectfloat-a-x-y-a"></a></dfn>, <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long②"><span class="kt">unsigned</span> <span class="kt">long</span></a> <dfn class="nv idl-code" data-dfn-for="Matrix/selectFloat(a, x, y), Matrix/selectFloat(a, x), Matrix/selectFloat(a)" data-dfn-type="argument" data-export="" id="dom-matrix-selectfloat-a-x-y-x"><code>x</code><a class="self-link" href="#dom-matrix-selectfloat-a-x-y-x"></a></dfn>, <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long③"><span class="kt">unsigned</span> <span class="kt">long</span></a> <dfn class="nv idl-code" data-dfn-for="Matrix/selectFloat(a, x, y), Matrix/selectFloat(a, x), Matrix/selectFloat(a)" data-dfn-type="argument" data-export="" id="dom-matrix-selectfloat-a-x-y-y"><code>y</code><a class="self-link" href="#dom-matrix-selectfloat-a-x-y-y"></a></dfn>);
+    <span class="kt">Promise</span> &lt;<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long④"><span class="kt">unsigned</span> <span class="kt">long</span></a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="selectLong(a, x, y)|selectLong(a, x)|selectLong(a)" id="dom-matrix-selectlong"><code>selectLong</code><a class="self-link" href="#dom-matrix-selectlong"></a></dfn> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②⑨">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/selectLong(a, x, y), Matrix/selectLong(a, x), Matrix/selectLong(a)" data-dfn-type="argument" data-export="" id="dom-matrix-selectlong-a-x-y-a"><code>a</code><a class="self-link" href="#dom-matrix-selectlong-a-x-y-a"></a></dfn>, <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑤"><span class="kt">unsigned</span> <span class="kt">long</span></a> <dfn class="nv idl-code" data-dfn-for="Matrix/selectLong(a, x, y), Matrix/selectLong(a, x), Matrix/selectLong(a)" data-dfn-type="argument" data-export="" id="dom-matrix-selectlong-a-x-y-x"><code>x</code><a class="self-link" href="#dom-matrix-selectlong-a-x-y-x"></a></dfn>, <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑥"><span class="kt">unsigned</span> <span class="kt">long</span></a> <dfn class="nv idl-code" data-dfn-for="Matrix/selectLong(a, x, y), Matrix/selectLong(a, x), Matrix/selectLong(a)" data-dfn-type="argument" data-export="" id="dom-matrix-selectlong-a-x-y-y"><code>y</code><a class="self-link" href="#dom-matrix-selectlong-a-x-y-y"></a></dfn>);
+
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name">String</a>> <dfn class="nv idl-code" data-dfn-for="Matrix" data-dfn-type="method" data-export="" data-lt="toJSON(a)" id="dom-matrix-tojson"><code>toJSON</code><a class="self-link" href="#dom-matrix-tojson"></a></dfn> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix③⓪">Matrix</a> <dfn class="nv idl-code" data-dfn-for="Matrix/toJSON(a)" data-dfn-type="argument" data-export="" id="dom-matrix-tojson-a-a"><code>a</code><a class="self-link" href="#dom-matrix-tojson-a-a"></a></dfn>);
+};
+    
+<span class="kt">interface</span> <dfn class="nv idl-code" data-dfn-type="interface" data-export="" id="sparsemat"><code>SparseMat</code><a class="self-link" href="#sparsemat"></a></dfn> : <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix③①">Matrix</a> {
+    // to do 
+};
+<span class="kt">interface</span> <dfn class="nv idl-code" data-dfn-type="interface" data-export="" id="densemat"><code>DenseMat</code><a class="self-link" href="#densemat"></a></dfn> : <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix③②">Matrix</a> {}; 
+<span class="kt">interface</span> <dfn class="nv idl-code" data-dfn-type="interface" data-export="" id="sparsevec"><code>SparseVec</code><a class="self-link" href="#sparsevec"></a></dfn> : <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix③③">Matrix</a> {};
+<span class="kt">interface</span> <dfn class="nv idl-code" data-dfn-type="interface" data-export="" id="densevec"><code>DenseVec</code><a class="self-link" href="#densevec"></a></dfn> : <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix③④">Matrix</a> {};
+</pre>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -1847,20 +2009,175 @@ cater to one algorithm but look for broader applications.</p>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
+   <li><a href="#dom-matrix-bitsize">bitSize</a><span>, in §10</span>
    <li><a href="#deep-neural-networks">deep neural networks</a><span>, in §3</span>
+   <li><a href="#densemat">DenseMat</a><span>, in §10</span>
+   <li><a href="#densevec">DenseVec</a><span>, in §10</span>
+   <li><a href="#dom-matrix-div">div(a, b)</a><span>, in §10</span>
    <li><a href="#dnns">DNNs</a><span>, in §3</span>
+   <li><a href="#dom-matrix-fromarray">fromArray(buf)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-fromjson">fromJSON(str)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-height">height</a><span>, in §10</span>
    <li><a href="#incremental-learning">incremental learning</a><span>, in §3</span>
    <li><a href="#infer">infer</a><span>, in §3</span>
    <li><a href="#inference">inference</a><span>, in §3</span>
+   <li><a href="#dom-matrix-istransposed">isTransposed</a><span>, in §10</span>
+   <li><a href="#dom-matrix-isvector">isVector</a><span>, in §10</span>
    <li><a href="#machine-learning">machine learning</a><span>, in §3</span>
+   <li><a href="#matrix">Matrix</a><span>, in §10</span>
+   <li><a href="#dom-matrix-max">max(a)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-mean">mean(a)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-min">min(a)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-mod">mod(a, b)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-multiply">multiply(a, b)</a><span>, in §10</span>
    <li><a href="#neural-networks">neural networks</a><span>, in §3</span>
+   <li><a href="#dom-matrix-rawmatrix">rawMatrix</a><span>, in §10</span>
+   <li><a href="#dom-matrix-real">real()</a><span>, in §10</span>
+   <li><a href="#dom-matrix-selectfloat">selectFloat(a)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-selectfloat">selectFloat(a, x)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-selectfloat">selectFloat(a, x, y)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-selectlong">selectLong(a)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-selectlong">selectLong(a, x)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-selectlong">selectLong(a, x, y)</a><span>, in §10</span>
+   <li><a href="#sparsemat">SparseMat</a><span>, in §10</span>
+   <li><a href="#sparsevec">SparseVec</a><span>, in §10</span>
+   <li><a href="#dom-matrix-sqrt">sqrt(a)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-square">square(a)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-subtract">subtract(a, b)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-sum">sum(a, b)</a><span>, in §10</span>
+   <li><a href="#dom-matrix-tojson">toJSON(a)</a><span>, in §10</span>
    <li><a href="#train">train</a><span>, in §3</span>
    <li><a href="#training">training</a><span>, in §3</span>
    <li><a href="#transfer-learning">transfer learning</a><span>, in §3</span>
+   <li><a href="#dom-matrix-width">width</a><span>, in §10</span>
+  </ul>
+  <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
+  <ul class="index">
+   <li>
+    <a data-link-type="biblio">[WebIDL]</a> defines the following terms:
+    <ul>
+     <li><a href="https://heycam.github.io/webidl/#idl-ArrayBuffer">ArrayBuffer</a>
+     <li><a href="https://heycam.github.io/webidl/#Exposed">Exposed</a>
+     <li><a href="https://heycam.github.io/webidl/#SecureContext">SecureContext</a>
+     <li><a href="https://heycam.github.io/webidl/#idl-boolean">boolean</a>
+     <li><a href="https://heycam.github.io/webidl/#idl-float">float</a>
+     <li><a href="https://heycam.github.io/webidl/#idl-unsigned-long">unsigned long</a>
+    </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
+   <dt id="biblio-webidl">[WebIDL]
+   <dd>Cameron McCormack; Boris Zbarsky; Tobie Langel. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 15 December 2016. ED. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
   </dl>
+  <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
+<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①">Exposed</a>=<span class="n">Windows</span>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext①">SecureContext</a>]
+<span class="kt">interface</span> <a class="nv" href="#matrix"><code>Matrix</code></a> {
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer②"><span class="kt">ArrayBuffer</span></a> <a class="nv" data-readonly="" data-type="ArrayBuffer" href="#dom-matrix-rawmatrix"><code>rawMatrix</code></a>; 
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑦"><span class="kt">unsigned</span> <span class="kt">long</span></a> <a class="nv" data-readonly="" data-type="unsigned long" href="#dom-matrix-height"><code>height</code></a>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long①①"><span class="kt">unsigned</span> <span class="kt">long</span></a> <a class="nv" data-readonly="" data-type="unsigned long" href="#dom-matrix-width"><code>width</code></a>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean②"><span class="kt">boolean</span></a> <a class="nv" data-readonly="" data-type="boolean" href="#dom-matrix-istransposed"><code>isTransposed</code></a>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean①①"><span class="kt">boolean</span></a> <a class="nv" data-readonly="" data-type="boolean" href="#dom-matrix-isvector"><code>isVector</code></a>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name">int</a> <a class="nv" data-readonly="" data-type="int" href="#dom-matrix-bitsize"><code>bitSize</code></a>; // Represent which numerical representation is used
+
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix③⑥">Matrix</a>> <a class="nv" href="#dom-matrix-fromjson"><code>fromJSON</code></a> (<a class="n" data-link-type="idl-name">String</a> <a class="nv" href="#dom-matrix-fromjson-str-str"><code>str</code></a>);
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①①⓪">Matrix</a>> <a class="nv" href="#dom-matrix-fromarray"><code>fromArray</code></a> (<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer①①"><span class="kt">ArrayBuffer</span></a> <a class="nv" href="#dom-matrix-fromarray-buf-buf"><code>buf</code></a>);
+
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②①⓪">Matrix</a>> <a class="nv" href="#dom-matrix-multiply"><code>multiply</code></a> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix③⑤">Matrix</a> <a class="nv" href="#dom-matrix-multiply-a-b-a"><code>a</code></a>, <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix④①">Matrix</a> <a class="nv" href="#dom-matrix-multiply-a-b-b"><code>b</code></a>); // Multiply two matrices 
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix⑤①">Matrix</a>> <a class="nv" href="#dom-matrix-div"><code>div</code></a> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix⑥①">Matrix</a> <a class="nv" href="#dom-matrix-div-a-b-a"><code>a</code></a>, <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix⑦①">Matrix</a> <a class="nv" href="#dom-matrix-div-a-b-b"><code>b</code></a>); // Return matrix of element-wise division
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix⑧①">Matrix</a>> <a class="nv" href="#dom-matrix-mod"><code>mod</code></a> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix⑨①">Matrix</a> <a class="nv" href="#dom-matrix-mod-a-b-a"><code>a</code></a>, <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①⓪①">Matrix</a> <a class="nv" href="#dom-matrix-mod-a-b-b"><code>b</code></a>); // Return element-wise remainder of division
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①①①">Matrix</a>> <a class="nv" href="#dom-matrix-sum"><code>sum</code></a> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①②①">Matrix</a> <a class="nv" href="#dom-matrix-sum-a-b-a"><code>a</code></a>, <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①③①">Matrix</a> <a class="nv" href="#dom-matrix-sum-a-b-b"><code>b</code></a>); // Return matrix of sum of elements of both matrices
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①④①">Matrix</a>> <a class="nv" href="#dom-matrix-subtract"><code>subtract</code></a> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①⑤①">Matrix</a> <a class="nv" href="#dom-matrix-subtract-a-b-a"><code>a</code></a>, <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①⑥①">Matrix</a> <a class="nv" href="#dom-matrix-subtract-a-b-b"><code>b</code></a>); // Return element-wise subtraction
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①⑦①">Matrix</a>> <a class="nv" href="#dom-matrix-square"><code>square</code></a> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①⑧①">Matrix</a> <a class="nv" href="#dom-matrix-square-a-a"><code>a</code></a>); // Return element-wise square 
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix①⑨①">Matrix</a>> <a class="nv" href="#dom-matrix-sqrt"><code>sqrt</code></a> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②⓪①">Matrix</a> <a class="nv" href="#dom-matrix-sqrt-a-a"><code>a</code></a>); // Return element square root 
+
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②①①">Matrix</a>> <a class="nv" href="#dom-matrix-mean"><code>mean</code></a> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②②①">Matrix</a> <a class="nv" href="#dom-matrix-mean-a-a"><code>a</code></a>); // Return mean of elements across dimensions
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②③①">Matrix</a>> <a class="nv" href="#dom-matrix-min"><code>min</code></a> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②④①">Matrix</a> <a class="nv" href="#dom-matrix-min-a-a"><code>a</code></a>); // Return minimum of elements across dimensions
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②⑤①">Matrix</a>> <a class="nv" href="#dom-matrix-max"><code>max</code></a> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②⑥①">Matrix</a> <a class="nv" href="#dom-matrix-max-a-a"><code>a</code></a>); // Return maximum of elements acorss dimensions
+
+    Promise &lt;Matrix> LogicalAnd (Matrix)
+
+    Promise &lt;Matrix> gamma ()
+
+    Promise &lt;Matrix> abs ();
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②⑦①">Matrix</a>> <a class="nv" href="#dom-matrix-real"><code>real</code></a> ();
+
+    <span class="kt">Promise</span> &lt;<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-float" id="ref-for-idl-float①"><span class="kt">float</span></a>> <a class="nv" href="#dom-matrix-selectfloat"><code>selectFloat</code></a> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②⑧①">Matrix</a> <a class="nv" href="#dom-matrix-selectfloat-a-x-y-a"><code>a</code></a>, <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long②①"><span class="kt">unsigned</span> <span class="kt">long</span></a> <a class="nv" href="#dom-matrix-selectfloat-a-x-y-x"><code>x</code></a>, <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long③①"><span class="kt">unsigned</span> <span class="kt">long</span></a> <a class="nv" href="#dom-matrix-selectfloat-a-x-y-y"><code>y</code></a>);
+    <span class="kt">Promise</span> &lt;<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long④①"><span class="kt">unsigned</span> <span class="kt">long</span></a>> <a class="nv" href="#dom-matrix-selectlong"><code>selectLong</code></a> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix②⑨①">Matrix</a> <a class="nv" href="#dom-matrix-selectlong-a-x-y-a"><code>a</code></a>, <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑤①"><span class="kt">unsigned</span> <span class="kt">long</span></a> <a class="nv" href="#dom-matrix-selectlong-a-x-y-x"><code>x</code></a>, <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑥①"><span class="kt">unsigned</span> <span class="kt">long</span></a> <a class="nv" href="#dom-matrix-selectlong-a-x-y-y"><code>y</code></a>);
+
+    <span class="kt">Promise</span> &lt;<a class="n" data-link-type="idl-name">String</a>> <a class="nv" href="#dom-matrix-tojson"><code>toJSON</code></a> (<a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix③⓪①">Matrix</a> <a class="nv" href="#dom-matrix-tojson-a-a"><code>a</code></a>);
+};
+    
+<span class="kt">interface</span> <a class="nv" href="#sparsemat"><code>SparseMat</code></a> : <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix③①①">Matrix</a> {
+    // to do 
+};
+<span class="kt">interface</span> <a class="nv" href="#densemat"><code>DenseMat</code></a> : <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix③②①">Matrix</a> {}; 
+<span class="kt">interface</span> <a class="nv" href="#sparsevec"><code>SparseVec</code></a> : <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix③③①">Matrix</a> {};
+<span class="kt">interface</span> <a class="nv" href="#densevec"><code>DenseVec</code></a> : <a class="n" data-link-type="idl-name" href="#matrix" id="ref-for-matrix③④①">Matrix</a> {};
+
+</pre>
+  <aside class="dfn-panel" data-for="matrix">
+   <b><a href="#matrix">#matrix</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-matrix">10. Strawman Proposal</a> <a href="#ref-for-matrix①">(2)</a> <a href="#ref-for-matrix②">(3)</a> <a href="#ref-for-matrix③">(4)</a> <a href="#ref-for-matrix④">(5)</a> <a href="#ref-for-matrix⑤">(6)</a> <a href="#ref-for-matrix⑥">(7)</a> <a href="#ref-for-matrix⑦">(8)</a> <a href="#ref-for-matrix⑧">(9)</a> <a href="#ref-for-matrix⑨">(10)</a> <a href="#ref-for-matrix①⓪">(11)</a> <a href="#ref-for-matrix①①">(12)</a> <a href="#ref-for-matrix①②">(13)</a> <a href="#ref-for-matrix①③">(14)</a> <a href="#ref-for-matrix①④">(15)</a> <a href="#ref-for-matrix①⑤">(16)</a> <a href="#ref-for-matrix①⑥">(17)</a> <a href="#ref-for-matrix①⑦">(18)</a> <a href="#ref-for-matrix①⑧">(19)</a> <a href="#ref-for-matrix①⑨">(20)</a> <a href="#ref-for-matrix②⓪">(21)</a> <a href="#ref-for-matrix②①">(22)</a> <a href="#ref-for-matrix②②">(23)</a> <a href="#ref-for-matrix②③">(24)</a> <a href="#ref-for-matrix②④">(25)</a> <a href="#ref-for-matrix②⑤">(26)</a> <a href="#ref-for-matrix②⑥">(27)</a> <a href="#ref-for-matrix②⑦">(28)</a> <a href="#ref-for-matrix②⑧">(29)</a> <a href="#ref-for-matrix②⑨">(30)</a> <a href="#ref-for-matrix③⓪">(31)</a> <a href="#ref-for-matrix③①">(32)</a> <a href="#ref-for-matrix③②">(33)</a> <a href="#ref-for-matrix③③">(34)</a> <a href="#ref-for-matrix③④">(35)</a>
+   </ul>
+  </aside>
+<script>/* script-dfn-panel */
+
+        document.body.addEventListener("click", function(e) {
+            var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
+            // Find the dfn element or panel, if any, that was clicked on.
+            var el = e.target;
+            var target;
+            var hitALink = false;
+            while(el.parentElement) {
+                if(el.tagName == "A") {
+                    // Clicking on a link in a <dfn> shouldn't summon the panel
+                    hitALink = true;
+                }
+                if(el.classList.contains("dfn-paneled")) {
+                    target = "dfn";
+                    break;
+                }
+                if(el.classList.contains("dfn-panel")) {
+                    target = "dfn-panel";
+                    break;
+                }
+                el = el.parentElement;
+            }
+            if(target != "dfn-panel") {
+                // Turn off any currently "on" or "activated" panels.
+                queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
+                    el.classList.remove("on");
+                    el.classList.remove("activated");
+                });
+            }
+            if(target == "dfn" && !hitALink) {
+                // open the panel
+                var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
+                if(dfnPanel) {
+                    console.log(dfnPanel);
+                    dfnPanel.classList.add("on");
+                    var rect = el.getBoundingClientRect();
+                    dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";
+                    dfnPanel.style.top = window.scrollY + rect.top + "px";
+                    var panelRect = dfnPanel.getBoundingClientRect();
+                    var panelWidth = panelRect.right - panelRect.left;
+                    if(panelRect.right > document.body.scrollWidth && (rect.left - (panelWidth + 5)) > 0) {
+                        // Reposition, because the panel is overflowing
+                        dfnPanel.style.left = window.scrollX + rect.left - (panelWidth + 5) + "px";
+                    }
+                } else {
+                    console.log("Couldn't find .dfn-panel[data-for='" + el.id + "']");
+                }
+            } else if(target == "dfn-panel") {
+                // Switch it to "activated" state, which pins it.
+                el.classList.add("activated");
+                el.style.left = null;
+                el.style.top = null;
+            }
+
+        });
+        </script>
